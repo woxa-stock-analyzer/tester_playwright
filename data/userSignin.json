@@ -1,0 +1,16 @@
+{
+    "userLoginValid": {
+        "email": "aaa123@gmail.com",
+        "password": "1234567a"
+    },
+
+    "userLoginInvalid": {
+        "email": "failed@gmail.com",
+        "password": "123456789"
+    },
+
+     "userLoginInvalidInput": {
+        "email": "failed😊😊@gmail.com",
+        "password": "123456789😊😊"
+    }
+}
