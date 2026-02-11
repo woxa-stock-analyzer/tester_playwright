@@ -4,6 +4,125 @@ import signUp from '../data/userSignUp.json';
 
 
 
+test.describe('Verify sign up success', () =>{
+
+
+        test ("Verify user sign up success with select profile pic", async ({ page }) => {
+        const signupPage = new SignUpPage(page);
+        const email = signUp.valid_user_select_profile.email;
+        const password = signUp.valid_user_select_profile.password;
+        const confirm_password = signUp.valid_user_select_profile.confirm_password;
+        const dispaly_name = signUp.valid_user_select_profile.dispaly_name;
+
+        await signupPage.goToSignUpPage();
+        await (await signupPage.ClickSignInButton()).click();
+        await signupPage.ClickSignUpLink().click();
+
+        await signupPage.emailInput().fill(email);
+        await signupPage.passwordInput().fill(password);
+        await signupPage.confirmPasswordInput().fill(confirm_password);
+        await signupPage.nextButton().click();
+
+        await signupPage.selectAvatarButton().click();
+        await signupPage.selectAvatarImage().click();
+        await signupPage.AvatarNextButton().click();
+
+        await signupPage.dispalyNameInput().fill(dispaly_name);
+        await signupPage.createAccountButton().click();
+        await expect(signupPage.VerifySignUpSuccessWithPic().ProfileWithPic).toBeVisible();
+        await expect(signupPage.VerifySignUpSuccessWithPic().ProfileWithPic).toHaveAttribute('src', /.+/);
+        
+})
+    test ("Verify user sign up success with no select profile pic", async ({ page }) => {
+        const signupPage = new SignUpPage(page);
+        const email = signUp.valid_user_no_select_profile.email;
+        const password = signUp.valid_user_no_select_profile.password;
+        const confirm_password = signUp.valid_user_no_select_profile.confirm_password;
+        const dispaly_name = signUp.valid_user_no_select_profile.dispaly_name;
+
+        await signupPage.goToSignUpPage();
+        await (await signupPage.ClickSignInButton()).click();
+        await signupPage.ClickSignUpLink().click();
+
+        await signupPage.emailInput().fill(email);
+        await signupPage.passwordInput().fill(password);
+        await signupPage.confirmPasswordInput().fill(confirm_password);
+        await signupPage.nextButton().click();
+ 
+        await signupPage.dispalyNameInput().fill(dispaly_name);
+        await signupPage.createAccountButton().click();
+
+        const firstChar = dispaly_name.trim().charAt(0).toUpperCase();
+        await expect(signupPage.VerifySignUpSuccessWithNoPic(dispaly_name).ProfileNoPic).toBeVisible();
+        await expect(signupPage.VerifySignUpSuccessWithNoPic(dispaly_name).ProfileNoPic).toHaveText(firstChar);
+    });
+
+
+
+    test ("Verify user sign up success with display name have number", async ({ page }) => {
+
+        const signupPage = new SignUpPage(page);
+        const email = signUp.valid_user_display_name_number.email;
+        const password = signUp.valid_user_display_name_number.password;
+        const confirm_password = signUp.valid_user_display_name_number.confirm_password;
+        const dispaly_name = signUp.valid_user_display_name_number.dispaly_name ;
+
+        await signupPage.goToSignUpPage();
+        await (await signupPage.ClickSignInButton()).click();
+        await signupPage.ClickSignUpLink().click();
+
+        await signupPage.emailInput().fill(email);
+        await signupPage.passwordInput().fill(password);
+        await signupPage.confirmPasswordInput().fill(confirm_password);
+        await signupPage.nextButton().click();
+
+        await signupPage.dispalyNameInput().fill(dispaly_name);
+        await signupPage.createAccountButton().click();
+
+        const firstChar = dispaly_name.trim().charAt(0).toUpperCase();
+        await expect(signupPage.VerifySignUpSuccessWithNoPic(dispaly_name).ProfileNoPic).toBeVisible();
+        await expect(signupPage.VerifySignUpSuccessWithNoPic(dispaly_name).ProfileNoPic).toHaveText(firstChar);
+
+});
+
+    test ("Verify user sign up success with display name have _", async ({ page }) => {
+
+        const signupPage = new SignUpPage(page);
+        const email = signUp.valid_user_display_name_underscore.email;
+        const password = signUp.valid_user_display_name_underscore.password;
+        const confirm_password = signUp.valid_user_display_name_underscore.confirm_password;
+        const dispaly_name = signUp.valid_user_display_name_underscore.dispaly_name ;
+
+        await signupPage.goToSignUpPage();
+        await (await signupPage.ClickSignInButton()).click();
+        await signupPage.ClickSignUpLink().click();
+
+        await signupPage.emailInput().fill(email);
+        await signupPage.passwordInput().fill(password);
+        await signupPage.confirmPasswordInput().fill(confirm_password);
+        await signupPage.nextButton().click();
+
+        await signupPage.dispalyNameInput().fill(dispaly_name);
+        await signupPage.createAccountButton().click();
+
+        const firstChar = dispaly_name.trim().charAt(0).toUpperCase();
+        await expect(signupPage.VerifySignUpSuccessWithNoPic(dispaly_name).ProfileNoPic).toBeVisible();
+        await expect(signupPage.VerifySignUpSuccessWithNoPic(dispaly_name).ProfileNoPic).toHaveText(firstChar);
+
+});
+
+});
+
+
+
+
+
+
+
+
+
+
+
 test.describe('Verify sign up failed', () => {
 
         test("Verify user sign up failed with invalid email format.", async ({ page }) => {
@@ -110,7 +229,7 @@ test.describe('Verify sign up failed', () => {
 
         await expect(signupPage.VerifySignUpFailedwithPasswordDontHaveNumbers().passwordError).toContainText('Invalid');
         await expect(signupPage.VerifySignUpFailedwithPasswordDontHaveNumbers().numberRequirement).toContainText('Must contain at least 1 number (0-9)');
-        await expect(signupPage.VerifySignUpFailedwithPasswordDontHaveNumbers().numberRequirement).toHaveClass('text-[12px] font-normal text-error-500');
+        await expect(signupPage.VerifySignUpFailedwithPasswordDontHaveNumbers().numberRequirement).toHaveClass('flex items-center gap-2');
     })
 
         test ("Verify user sign up failed with password have special character.", async ({ page }) => {
@@ -221,9 +340,9 @@ test.describe('Verif eye icon', () => {
 
     test ("Verify user can see password when click eye icon.", async ({ page }) => {
         const signupPage = new SignUpPage(page);
-        const email = signUp.valid_user.email;
-        const password = signUp.valid_user.password;
-        const confirm_password = signUp.valid_user.confirm_password;
+        const email = signUp.valid_user_eye_icon.email;
+        const password = signUp.valid_user_eye_icon.password;
+        const confirm_password = signUp.valid_user_eye_icon.confirm_password;
         await signupPage.goToSignUpPage();
 
         await (await signupPage.ClickSignInButton()).click();

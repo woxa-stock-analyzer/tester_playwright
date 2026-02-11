@@ -1,9 +1,33 @@
 {
-    "valid_user": {
-        "email": "III@gmail.com",
+    "valid_user_select_profile": {
+        "email": "YoYo2@gmail.com",
+        "password": "YoYo123456789",
+        "confirm_password": "YoYo123456789",
+        "dispaly_name": "YoYoYo"
+    },
+      "valid_user_no_select_profile": {
+        "email": "PPP@gmail.com",
+        "password": "PPP123456789",
+        "confirm_password": "PPP123456789",
+        "dispaly_name": "Putty"
+    },
+        "valid_user_eye_icon": {
+        "email": "YoYo4@gmail.com",
+        "password": "YoYo123456789",
+        "confirm_password": "YoYo123456789",
+        "dispaly_name": "YoYoEyeIcon"
+    },
+    "valid_user_display_name_number": {
+        "email": "Toy@gmail.com",
         "password": "woxa123456789",
         "confirm_password": "woxa123456789",
-        "dispaly_name": "ant1234"
+        "dispaly_name": "Toy123"
+    },
+    "valid_user_display_name_underscore": {
+        "email": "Kung@gmail.com",
+        "password": "woxa123456789",
+        "confirm_password": "woxa123456789",
+        "dispaly_name": "Kung_123"
     },
     "invalid_email_format": {
         "email": "sasipreyagmail.com",

@@ -33,12 +33,25 @@ export default class SignUpPage {
   nextButton() {
     return this.page.locator('[data-testid="sign-up-next"]');
   }
+
+  selectAvatarButton() {
+    return this.page.locator('[data-testid="sign-up-profile-select-button"]');
+  }
+
+  selectAvatarImage(){
+    return this.page.locator('[data-testid="sign-up-avatar-option-/Avatar/Avartar.png"]');
+  }
+AvatarNextButton(){
+    return this.page.locator('[data-testid="sign-up-avatar-next"]');
+  }
   dispalyNameInput() {
     return this.page.locator('[data-testid="sign-up-display-name-input-input"]');
   }
   createAccountButton() {
     return this.page.locator('[data-testid="sign-up-submit"]');
   }
+
+
 
   EyeIcon(){
     return {
@@ -141,6 +154,19 @@ VerifySignUpFailedwithInvalidNameHaveSpecialCharacters(){
 VerifySignUpFailedwithEmptyDisplayName(){
     return {
       emptyDisplayNameErrorEmpty: this.page.locator('[data-testid="sign-up-display-name-input-error"]')
+}
+}
+
+
+VerifySignUpSuccessWithNoPic(dispaly_name: string){
+    return {
+      ProfileNoPic: this.page.locator('[data-testid="nav-user-initial"]:visible')
+}
+}
+
+VerifySignUpSuccessWithPic(){
+    return {
+      ProfileWithPic: this.page.getByTestId('nav-user-menu').getByTestId('nav-user-avatar')
 }
 }
 }
