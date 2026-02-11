@@ -1,0 +1,91 @@
+{
+    "valid_user": {
+        "email": "III@gmail.com",
+        "password": "woxa123456789",
+        "confirm_password": "woxa123456789",
+        "dispaly_name": "ant1234"
+    },
+    "invalid_email_format": {
+        "email": "sasipreyagmail.com",
+        "password": "woxa1234567",
+        "confirm_password": "woxa1234567"
+    },
+    "duplicate_email": {
+        "email": "sasipreya@gmail.com",
+        "password": "woxa1234567",
+        "confirm_password": "woxa1234567"
+    },
+    "invalid_password_least_than_8": {
+        "email": "test@gmail.com",
+        "password": "woxa12",
+        "confirm_password": "woxa12"
+    },
+    "invalid_password_no_have_letter": {
+        "email": "test@gmail.com",
+        "password": "12345678",
+        "confirm_password": "12345678"
+    },
+    "invalid_password_no_have_number": {
+        "email": "test@gmail.com",
+        "password": "woxasandbox",
+        "confirm_password": "woxasandbox"
+    },
+    "invalid_password_have_special_character": {
+        "email": "test@gmail.com",
+        "password": "woxa123*",
+        "confirm_password": "woxa123*"
+    },
+    "invalid_confirm_password_not_match": {
+        "email": "test@gmail.com",
+        "password": "woxa1234567",
+        "confirm_password": "woxa12345678"
+    },
+    "invalid_confirm_password_empty": {
+        "email": "test@gmail.com",
+        "password": "woxa1234567",
+        "confirm_password": ""
+    },
+    "invalid_email_empty": {
+        "email": "",
+        "password": "woxa1234567",
+        "confirm_password": "woxa1234567"
+    },
+    "invalid_email_emoji": {
+        "email": "😀😍",
+        "password": "woxa1234567",
+        "confirm_password": "woxa1234567" 
+    },
+    "invalid_password_empty": {
+        "email": "sasipreya@gmail.com",
+        "password": "",
+        "confirm_password": "woxa1234567"
+    },
+
+        "invalid_name_not_Eng": {
+        "email": "catcat@gmail.com",
+        "password": "woxa1234567",
+        "confirm_password": "woxa1234567",
+        "dispaly_name": "แมวเหมียว"
+    },
+        "invalid_name_least_than_5": {
+        "email": "catcat@gmail.com",
+        "password": "woxa1234567",
+        "confirm_password": "woxa1234567",
+        "dispaly_name": "cat"
+    },
+        "invalid_name_have_special_characters": {
+        "email": "catcat@gmail.com",
+        "password": "woxa1234567",
+        "confirm_password": "woxa1234567",
+        "dispaly_name": "cat!@#$%^&*"
+    },
+        "invalid_name_empty": {
+        "email": "catcat@gmail.com",
+        "password": "woxa1234567",
+        "confirm_password": "woxa1234567",
+        "dispaly_name": ""
+    }
+
+}
+
+
