@@ -7,6 +7,7 @@ export class MarketPage {
     this.page = page;
   }
   //   ===== LOCATORS =====
+  
 
   //   ===== ACTIONS =====
   async goToMarketsPage() {
