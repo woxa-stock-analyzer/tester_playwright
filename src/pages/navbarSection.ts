@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 
-export class NavbarPage {
+export class NavbarSection {
   readonly page: Page;
 
   constructor(page: Page) {
@@ -8,7 +8,7 @@ export class NavbarPage {
   }
 
 //   ===== LOCATORS =====
-  get guestUserAvater(): Locator {
+  get guestUserAvatar(): Locator {
     return this.page.getByTestId("nav-signin-desktop");
   }
 
@@ -28,7 +28,7 @@ export class NavbarPage {
 
   //   ===== ACTIONS =====
   async clickGuestUserAvatar() {
-    await this.guestUserAvater.click();
+    await this.guestUserAvatar.click();
   }
 
   async clickUserAvatar() {
