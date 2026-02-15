@@ -1,41 +1,46 @@
 {
     "valid_user_select_profile": {
-        "email": "YoYo2@gmail.com",
-        "password": "YoYo123456789",
-        "confirm_password": "YoYo123456789",
-        "dispaly_name": "YoYoYo"
+        "email": "Bynie@gmail.com",
+        "password": "mimi123456789",
+        "confirm_password": "mimi123456789",
+        "dispaly_name": "Bynie"
     },
       "valid_user_no_select_profile": {
-        "email": "PPP@gmail.com",
-        "password": "PPP123456789",
-        "confirm_password": "PPP123456789",
-        "dispaly_name": "Putty"
+        "email": "Feddy@gmail.com",
+        "password": "mumu123456789",
+        "confirm_password": "mumu123456789",
+        "dispaly_name": "Feddy"
     },
         "valid_user_eye_icon": {
-        "email": "YoYo4@gmail.com",
-        "password": "YoYo123456789",
-        "confirm_password": "YoYo123456789",
-        "dispaly_name": "YoYoEyeIcon"
+        "email": "sunny@gmail.com",
+        "password": "sun123456789",
+        "confirm_password": "sun123456789",
+        "dispaly_name": "SunEyeIcon"
     },
     "valid_user_display_name_number": {
-        "email": "Toy@gmail.com",
+        "email": "IoI@gmail.com",
         "password": "woxa123456789",
         "confirm_password": "woxa123456789",
-        "dispaly_name": "Toy123"
+        "dispaly_name": "IoI123"
     },
     "valid_user_display_name_underscore": {
-        "email": "Kung@gmail.com",
-        "password": "woxa123456789",
-        "confirm_password": "woxa123456789",
-        "dispaly_name": "Kung_123"
+        "email": "Zanddy@gmail.com",
+        "password": "soda123456789",
+        "confirm_password": "soda123456789",
+        "dispaly_name": "Zanddy_zz"
     },
+
+
+
+
+
     "invalid_email_format": {
         "email": "sasipreyagmail.com",
         "password": "woxa1234567",
         "confirm_password": "woxa1234567"
     },
     "duplicate_email": {
-        "email": "sasipreya@gmail.com",
+        "email": "Bynie@gmail.com",
         "password": "woxa1234567",
         "confirm_password": "woxa1234567"
     },

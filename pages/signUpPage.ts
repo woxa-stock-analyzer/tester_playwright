@@ -3,170 +3,221 @@
 
 import { Page, Locator } from '@playwright/test';
 
+
 export default class SignUpPage {
   readonly page: Page;
+  readonly iconUser: Locator;
+  readonly signUpLink: Locator;
+  //  Sign up form locators
+  readonly emailField: Locator;
+  readonly passwordField: Locator;
+  readonly confirmPasswordField: Locator;
+  readonly passwordEyeIcon: Locator;
+  readonly confirmPasswordEyeIcon: Locator;
+  readonly nextButton: Locator;
+  // User setting form locators
+  readonly userSettingPage: Locator;
+  readonly selectAvatarButton: Locator;
+  readonly selectAvatarImage: Locator;
+  readonly avatarNextButton: Locator;
+  readonly displayNameField: Locator;
+  readonly createAccountButton: Locator;
+  // Profile locators
+  readonly profileNoPic: Locator;
+  readonly profileAvatar: Locator;
+
+  // Error message locators
+  readonly emailError: Locator;
+  readonly passwordError: Locator;
+  readonly passwordLengthRequirement: Locator;
+  readonly passwordLetterRequirement: Locator;
+  readonly passwordNumberRequirement: Locator;
+  readonly passwordSpecialCharError: Locator;
+  readonly confirmPasswordError: Locator;
+
+  readonly displayNameEmptyError: Locator;
+  readonly displayNameEngRequirement: Locator;
+  readonly displayNameMinLengthRequirement: Locator;
+  readonly displayNameSpecialCharError: Locator;
+  
+  
+
+  
 
   constructor(page: Page) {
     this.page = page;
-  }
+    this.iconUser = page.locator('[data-testid="nav-signin-desktop"]');
+    this.signUpLink = page.locator('[data-testid="signin-show-signup"]');
 
-  async goToSignUpPage() {
-    await this.page.goto('https://stockanalyzer.adenxus.com/markets');
-  }
+    this.emailField = page.locator('[data-testid="sign-up-email-input-input"]');
+    this.passwordField = page.locator('[data-testid="sign-up-password-input-input"]');
+    this.confirmPasswordField = page.locator('[data-testid="sign-up-confirm-password-input-input"]');
+    this.passwordEyeIcon = page.locator('[data-testid="sign-up-password-input-toggle-hidden"]');
+    this.confirmPasswordEyeIcon = page.locator('[data-testid="sign-up-confirm-password-input-toggle-hidden"]');
+    this.nextButton = page.locator('[data-testid="sign-up-next"]');
 
-  async ClickSignInButton(): Promise<Locator> {
-    return this.page.locator('[data-testid="nav-signin-desktop"]');
-  }
+    this.userSettingPage = page.locator('[data-testid="sign-up-profile-step"]');
+    this.selectAvatarButton = page.locator('[data-testid="sign-up-profile-select-button"]');
+    this.selectAvatarImage = page.locator('[data-testid="sign-up-avatar-option-0"]');
+    this.avatarNextButton = page.locator('[data-testid="sign-up-avatar-next"]');
+    this.displayNameField = page.locator('[data-testid="sign-up-display-name-input-input"]');
+    this.createAccountButton = page.locator('[data-testid="sign-up-submit"]');
 
-    ClickSignUpLink() {
-    return this.page.locator('[data-testid="signin-show-signup"]');
-  }
-  emailInput() {
-    return this.page.locator('[data-testid="sign-up-email-input-input"]');
-  }
-  passwordInput() {
-    return this.page.locator('[data-testid="sign-up-password-input-input"]');
-  }
-  confirmPasswordInput() {
-    return this.page.locator('[data-testid="sign-up-confirm-password-input-input"]');
-  }
-  nextButton() {
-    return this.page.locator('[data-testid="sign-up-next"]');
-  }
+    this.profileNoPic = page.locator('[data-testid="nav-user-menu"] [data-testid="nav-user-initial"]');
+    this.profileAvatar = page.locator('[data-testid="nav-user-menu"] [data-testid="nav-user-avatar"]');
 
-  selectAvatarButton() {
-    return this.page.locator('[data-testid="sign-up-profile-select-button"]');
-  }
+    // Error message locators
+    this.emailError = page.locator('[data-testid="sign-up-email-input-error"]');
+    this.passwordError = page.locator('[data-testid="sign-up-password-input-error"]');
+    this.passwordLengthRequirement = page.locator('[data-testid="password-requirement-min-length-text"]');
+    this.passwordLetterRequirement = page.locator('[data-testid="password-requirement-has-letter-text"]');
+    this.passwordNumberRequirement = page.locator('[data-testid="password-requirement-has-number-text"]');
+    this.passwordSpecialCharError = page.locator('[data-testid="password-requirement-no-special-text"]');
+    this.confirmPasswordError = page.locator('[data-testid="sign-up-confirm-password-input-error"]');
 
-  selectAvatarImage(){
-    return this.page.locator('[data-testid="sign-up-avatar-option-/Avatar/Avartar.png"]');
-  }
-AvatarNextButton(){
-    return this.page.locator('[data-testid="sign-up-avatar-next"]');
-  }
-  dispalyNameInput() {
-    return this.page.locator('[data-testid="sign-up-display-name-input-input"]');
-  }
-  createAccountButton() {
-    return this.page.locator('[data-testid="sign-up-submit"]');
-  }
+    this.displayNameEmptyError = page.locator('[data-testid="sign-up-display-name-input-error"]');
+    this.displayNameEngRequirement = page.locator('[data-testid="displayname-requirement-english-only-text"]');
+    this.displayNameMinLengthRequirement = page.locator('[data-testid="displayname-requirement-min-length-text"]');
+    this.displayNameSpecialCharError = page.locator('[data-testid="displayname-requirement-no-special-text"]');
 
 
+    
+  }
 
-  EyeIcon(){
+  async clickIconUser() {
+    await this.iconUser.click();
+  }
+
+  async clickSignUpLink() {
+    await this.signUpLink.click();
+  }
+
+  async fillEmail(email: string) {
+    await this.emailField.fill(email);
+  }
+
+  async fillPassword(password: string) {
+    await this.passwordField.fill(password);
+  }
+
+  async fillConfirmPassword(confirmPassword: string) {
+    await this.confirmPasswordField.fill(confirmPassword);
+  }
+
+  async clickPasswordEyeIcon() {
+    await this.passwordEyeIcon.click();
+  }
+
+  async clickConfirmPasswordEyeIcon() {
+    await this.confirmPasswordEyeIcon.click();
+  }
+
+  displayPasswordAndConfirmPassword() {
     return {
-      passwordEyeIcon: this.page.locator('[data-testid="sign-up-password-input-toggle-hidden"]'),
-      confirmPasswordEyeIcon: this.page.locator('[data-testid="sign-up-confirm-password-input-toggle-hidden"]')
-    }
-
-  }
-
-  VerifySignUpFailedwithInvalidEmailFormat() {
-      return {
-      emailErrorFormat: this.page.locator('[data-testid="sign-up-email-input-error"]'),
-    };
-}
-
- VerifySignUpFailedwithDuplicateEmail(){
-  return {
-    emailErrorDup: this.page.locator('[data-testid="sign-up-email-input-error"]'),
-  }
-}
-
- VerifySignUpFailedwithInvalidPasswordLeastThan8(){
-  return {
-    passwordError: this.page.locator('[data-testid="sign-up-password-input-error"]'),
-    lengthRequirement: this.page.locator('[data-testid="password-requirement-min-length-text"]'),
-  }
-}
-
-  VerifySignUpFailedwithPasswordDontHaveLetters() {
-    return {
-      passwordError: this.page.locator('[data-testid="sign-up-password-input-error"]'),
-      letterRequirement: this.page.locator('[data-testid="password-requirement-has-letter-text"]')
-    };
-}
-VerifySignUpFailedwithPasswordDontHaveNumbers(){
-    return {
-      passwordError: this.page.locator('[data-testid="sign-up-password-input-error"]'),
-      numberRequirement: this.page.locator('[data-testid="password-requirement-has-number"]')
-    };
-}
-
-VerifySignUpFailedwithPasswordHaveSpecialCharacter(){
-    return {
-      passwordError: this.page.locator('[data-testid="sign-up-password-input-error"]'),
-      specialCharError: this.page.locator('[data-testid="password-requirement-no-special-text"]')
-    };
-}
-
-VerifySignUpFailedwithPasswordMismatch(){
-    return {
-      passwordMismatchError: this.page.locator('[data-testid="sign-up-confirm-password-input-error"]')
-    };
-}
-VerifySignUpFailedwithConfirmPasswordEmptyField(){
-    return {
-      confirmPasswordRequirement: this.page.locator('[data-testid="sign-up-confirm-password-input-error"]')
-    };
-}
-VerifySignUpFailedwithEmptyEmail(){
-    return {
-      emailErrorEmpty: this.page.locator('[data-testid="sign-up-email-input-error"]')
-    };  
-  }
-
-  VerifySignUpFailedwithEmailEmoji(){
-    return {
-      emailErrorEmoji: this.page.locator('[data-testid="sign-up-email-input-error"]')
+      passwordField: this.passwordField,
+      confirmPasswordField: this.confirmPasswordField
     };
   }
 
-  VerifySignUpFailedwithEmptyPassword(){
-    return {
-      passwordErrorEmpty: this.page.locator('[data-testid="sign-up-password-input-error"]')
-    };
+  async clickNextButton() {
+    await this.nextButton.click();
   }
 
-  VerifyRedirectToUserSettingPage(){
-    return {
-      userSettingHeader: this.page.locator('[data-testid="sign-up-profile-step"]')
-    }
+  async fillDisplayName(displayName: string) {
+    await this.displayNameField.fill(displayName);
   }
-  VerifySignUpFailedwithInvalidNameNoEng(){
-    return {
-      invalidNameNoEng: this.page.locator('[data-testid="displayname-requirement-english-only-text"]')
+
+  displayUserSettingPage(){
+    return this.userSettingPage;
   }
-}
-VerifySignUpFailedwithInvalidNameLessThan5Chars(){
-    return {
-      invalidNameLessThan5Chars: this.page.locator('[data-testid="displayname-requirement-min-length-text"]')
-}
-}
 
-VerifySignUpFailedwithInvalidNameHaveSpecialCharacters(){
-    return {
-      invalidNameSpecialChars: this.page.locator('[data-testid="displayname-requirement-no-special-text"]')
-      
-}
-}
+  async clickSelectAvatarButton() {
+    await this.selectAvatarButton.click();
+  }
 
-VerifySignUpFailedwithEmptyDisplayName(){
-    return {
-      emptyDisplayNameErrorEmpty: this.page.locator('[data-testid="sign-up-display-name-input-error"]')
-}
-}
+  async clickSelectAvatarImage() {
+    await this.selectAvatarImage.click();
+  }
+  
+  async clickAvatarNextButton() {
+    await this.avatarNextButton.click();
+  }
 
+  async fillDisplayname(displayname: string) {
+    await this.displayNameField.fill(displayname);
+  }
 
-VerifySignUpSuccessWithNoPic(dispaly_name: string){
-    return {
-      ProfileNoPic: this.page.locator('[data-testid="nav-user-initial"]:visible')
-}
-}
+  async clickCreateAccountButton() {
+    await this.createAccountButton.click();
+  }
 
-VerifySignUpSuccessWithPic(){
-    return {
-      ProfileWithPic: this.page.getByTestId('nav-user-menu').getByTestId('nav-user-avatar')
+  displayProfileNoPic(display_name: string) {
+  const firstChar = display_name.trim().charAt(0).toUpperCase();
+
+  return this.profileNoPic.filter({ hasText: firstChar });
 }
-}
+  displayProfileWithPic() {
+    return this.profileAvatar;
+  }
+
+  displayEmailErrorFormat() {
+    return this.emailError;
+  }
+
+  displayEmailErrorDup() {
+    return this.emailError;
+  }
+ 
+  displayPasswordError() {
+    return this.passwordError;
+  }
+
+  displayPasswordLengthRequirement() {
+    return this.passwordLengthRequirement;
+  }
+
+  displayPasswordLetterRequirement() {
+    return this.passwordLetterRequirement;
+  }
+
+  displayPasswordNumberRequirement() {
+    return this.passwordNumberRequirement;
+  }
+
+  displayPasswordSpecialCharError() {
+    return this.passwordSpecialCharError;
+  }
+
+  displayConfirmPasswordError() {
+    return this.confirmPasswordError;
+  }
+
+  displayEmailErrorEmpty() {
+    return this.emailError;
+  }
+
+  displayEmailErrorEmoji() {  
+    return this.emailError;
+  }
+
+  displayPasswordErrorEmpty() {
+    return this.passwordError;
+  }
+
+  displayNameFieldError() {
+    return this.displayNameEmptyError;
+  }
+
+  displayDisplayNameEngRequirement() {
+    return this.displayNameEngRequirement;
+  }
+
+  displayDisplayNameMinLengthRequirement() {
+    return this.displayNameMinLengthRequirement;
+  }
+
+  displayDisplayNameSpecialCharError() {
+    return this.displayNameSpecialCharError;
+  }
+
 }
