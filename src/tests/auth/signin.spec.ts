@@ -93,7 +93,7 @@ test.describe.parallel("User sign in with invalid", () => {
     });
   });
 
-  test("Sign-in-005 User sign in with invalid input", async ({ page }) => {
+  test("Sign-in-005 User sign in with invalid data type", async ({ page }) => {
     //   Enter markets page (Homepage of website)
     await test.step("Go to markets page", async () => {
       await market.goToMarketsPage();
@@ -119,13 +119,14 @@ test.describe.parallel("User sign in with invalid", () => {
 
     // Verify no emoji in input field
     await test.step("Verify field not contain emoji", async () => {
+      const inputEmailValue = await signIn.getEmailValue();
+      const inputPasswordValue = await signIn.getPasswordValue();
+
       // Assert that the email not contains an emoji
-      expect.soft(containsEmoji(User.userLoginInvalidInput.email)).toBe(false);
+      expect.soft(containsEmoji(inputEmailValue)).toBe(false);
 
       // Assert that the password not contains an emoji
-      expect
-        .soft(containsEmoji(User.userLoginInvalidInput.password))
-        .toBe(false);
+      expect.soft(containsEmoji(inputPasswordValue)).toBe(false);
     });
   });
 });
