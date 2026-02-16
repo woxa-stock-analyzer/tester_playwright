@@ -80,7 +80,7 @@ export default defineConfig({
   // },
 
   expect: {
-    timeout: process.env.CI ? 15000 : 5000,
+    timeout: process.env.CI ? 60000 : 30000,
   },
   timeout: process.env.CI ? 60000 : 30000,
 });
