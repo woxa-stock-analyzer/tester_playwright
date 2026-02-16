@@ -23,7 +23,7 @@ test.describe.parallel("User sign out success", () => {
 
     // Open sign in modal
     await test.step("Open sign in modal", async () => {
-      await navbar.guestUserAvatar.click();
+      await navbar.clickGuestUserAvatar();
     });
 
     // Sign in with valid user
@@ -36,12 +36,7 @@ test.describe.parallel("User sign out success", () => {
 
     // Verify sign in successful
     await test.step("Verify sign in successful", async () => {
-      // Wait for avatar
-      await navbar.waitForUserAvatar();
-
-      await expect(
-        page.getByTestId("nav-user-menu").getByTestId("nav-user-avatar"),
-      ).toBeVisible();
+      await expect(navbar.userAvatar).toBeVisible();
     });
 
     // Click user avatar
@@ -58,9 +53,6 @@ test.describe.parallel("User sign out success", () => {
     await test.step("Click confirm sign out", async () => {
       await navbar.clickConfirmSignOutButton();
     });
-
-    // Wait until page load finish
-    await page.waitForLoadState("networkidle");
 
     // Verify user has been sign out
     await test.step("Verify user has been sign out", async () => {
