@@ -34,6 +34,9 @@ test.describe.parallel("User sign out success", () => {
       );
     });
 
+    // Wait until page load finish
+    await page.waitForLoadState("networkidle");
+
     // Verify sign in successful
     await test.step("Verify sign in successful", async () => {
       await expect(
@@ -55,6 +58,9 @@ test.describe.parallel("User sign out success", () => {
     await test.step("Click confirm sign out", async () => {
       await navbar.clickConfirmSignOutButton();
     });
+
+    // Wait until page load finish
+    await page.waitForLoadState("networkidle");
 
     // Verify user has been sign out
     await test.step("Verify user has been sign out", async () => {

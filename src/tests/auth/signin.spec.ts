@@ -35,6 +35,9 @@ test.describe.parallel("User sign in with valid", () => {
       );
     });
 
+    // Wait until page load finish
+    await page.waitForLoadState("networkidle");
+
     // Verify sign in successful
     await test.step("Verify sign in successful", async () => {
       await expect(navbar.userAvatar).toBeVisible();
@@ -62,6 +65,9 @@ test.describe.parallel("User sign in with invalid", () => {
       );
     });
 
+    // Wait until page load finish
+    await page.waitForLoadState("networkidle");
+
     // Verify sign in failed
     await test.step("Verify sign in failed", async () => {
       await expect(signIn.errorSignInFailedMessage).toBeVisible();
@@ -86,6 +92,9 @@ test.describe.parallel("User sign in with invalid", () => {
         User.userLoginInvalid.password,
       );
     });
+
+    // Wait until page load finish
+    await page.waitForLoadState("networkidle");
 
     // Verify sign in failed
     await test.step("Verify sign in failed", async () => {
