@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
   signIn = new SignInPage(page);
 });
 
-test.describe.parallel("User sign in with valid", () => {
+test.describe("User sign in with valid", () => {
   test("Sign-in-001 User sign in success", async ({ page }) => {
     //   Enter markets page (Homepage of website)
     await test.step("Go to markets page", async () => {
@@ -42,7 +42,7 @@ test.describe.parallel("User sign in with valid", () => {
   });
 });
 
-test.describe.parallel("User sign in with invalid", () => {
+test.describe("User sign in with invalid", () => {
   test("Sign-in-003 User sign in with invalid email", async ({ page }) => {
     //   Enter markets page (Homepage of website)
     await test.step("Go to markets page", async () => {

@@ -14,7 +14,7 @@ test.beforeEach(async ({ page }) => {
   signIn = new SignInPage(page);
 });
 
-test.describe.parallel("User sign out success", () => {
+test.describe("User sign out success", () => {
   test("Sign-out-001 User sign out from system success", async ({ page }) => {
     //   Enter markets page (Homepage of website)
     await test.step("Go to markets page", async () => {
@@ -29,8 +29,8 @@ test.describe.parallel("User sign out success", () => {
     // Sign in with valid user
     await test.step("Sign in with valid user", async () => {
       await signIn.signIn(
-        User.userLoginValid.email,
-        User.userLoginValid.password,
+        User.userLoginValidForLogout.email,
+        User.userLoginValidForLogout.password,
       );
     });
 

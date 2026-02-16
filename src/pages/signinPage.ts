@@ -44,11 +44,17 @@ export class SignInPage {
     return await this.passwordInput.inputValue();
   }
 
-
   //   ===== FLOW ACTIONS =====
   async signIn(email: string, password: string) {
     await this.fillEmail(email);
     await this.fillPassword(password);
     await this.clickSignInButton();
+
+    // Wait NextAuth session API response
+    await this.page.waitForFunction(async () => {
+      const res = await fetch("/api/auth/session");
+      const session = await res.json();
+      return session?.user !== undefined;
+    });
   }
 }
