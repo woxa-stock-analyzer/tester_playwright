@@ -34,11 +34,11 @@ test.describe.parallel("User sign out success", () => {
       );
     });
 
-    // Wait until page load finish
-    await page.waitForLoadState("networkidle");
-
     // Verify sign in successful
     await test.step("Verify sign in successful", async () => {
+      // Wait for avatar
+      await navbar.waitForUserAvatar();
+
       await expect(
         page.getByTestId("nav-user-menu").getByTestId("nav-user-avatar"),
       ).toBeVisible();

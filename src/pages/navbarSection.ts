@@ -42,4 +42,8 @@ export class NavbarSection {
   async clickConfirmSignOutButton() {
     await this.confirmSignOutButton.click();
   }
+
+  async waitForUserAvatar() {
+  await this.userAvatar.waitFor({ state: "visible" });
+}
 }
