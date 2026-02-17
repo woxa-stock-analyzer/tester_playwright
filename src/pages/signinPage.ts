@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
 export class SignInPage {
   readonly page: Page;
@@ -33,6 +33,7 @@ export class SignInPage {
   }
 
   async clickSignInButton() {
+    await expect(this.signInButton).toBeEnabled();
     await this.signInButton.click();
   }
 
@@ -49,12 +50,5 @@ export class SignInPage {
     await this.fillEmail(email);
     await this.fillPassword(password);
     await this.clickSignInButton();
-
-    // Wait NextAuth session API response
-    await this.page.waitForFunction(async () => {
-      const res = await fetch("/api/auth/session");
-      const session = await res.json();
-      return session?.user !== undefined;
-    });
   }
 }

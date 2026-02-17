@@ -7,7 +7,7 @@ export class NavbarSection {
     this.page = page;
   }
 
-//   ===== LOCATORS =====
+  //   ===== LOCATORS =====
   get guestUserAvatar(): Locator {
     return this.page.getByTestId("nav-signin-desktop");
   }
@@ -15,7 +15,7 @@ export class NavbarSection {
   get userAvatar(): Locator {
     return this.page
       .getByTestId("nav-user-menu")
-      .getByTestId("nav-user-avatar");
+      .getByTestId("nav-user-initial");
   }
 
   get signOutButton(): Locator {
@@ -23,7 +23,7 @@ export class NavbarSection {
   }
 
   get confirmSignOutButton(): Locator {
-    return this.page.getByTestId('logout-dialog-confirm');
+    return this.page.getByTestId("logout-dialog-confirm");
   }
 
   //   ===== ACTIONS =====
@@ -44,6 +44,6 @@ export class NavbarSection {
   }
 
   async waitForUserAvatar() {
-  await this.userAvatar.waitFor({ state: "visible" });
-}
+    await this.userAvatar.waitFor({ state: "visible" });
+  }
 }

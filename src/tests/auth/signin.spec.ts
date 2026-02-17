@@ -39,6 +39,26 @@ test.describe("User sign in with valid", () => {
     await test.step("Verify sign in successful", async () => {
       await expect(navbar.userAvatar).toBeVisible();
     });
+
+    // Click user avatar
+    await test.step("Click user avatar", async () => {
+      await navbar.clickUserAvatar();
+    });
+
+    // Click sign out
+    await test.step("Click SignOut", async () => {
+      await navbar.clickSignOutButton();
+    });
+
+    // Click confirm sign out
+    await test.step("Click confirm sign out", async () => {
+      await navbar.clickConfirmSignOutButton();
+    });
+
+    // Verify user has been sign out
+    await test.step("Verify user has been sign out", async () => {
+      await expect(navbar.guestUserAvatar).toBeVisible();
+    });
   });
 });
 
