@@ -143,9 +143,6 @@ export default class SignUpPage {
     await this.avatarNextButton.click();
   }
 
-  async fillDisplayname(displayname: string) {
-    await this.displayNameField.fill(displayname);
-  }
 
   async clickCreateAccountButton() {
     await this.createAccountButton.click();
@@ -160,13 +157,11 @@ export default class SignUpPage {
     return this.profileAvatar;
   }
 
-  displayEmailErrorFormat() {
+  displayEmailError() {
     return this.emailError;
   }
 
-  displayEmailErrorDup() {
-    return this.emailError;
-  }
+
  
   displayPasswordError() {
     return this.passwordError;
@@ -190,14 +185,6 @@ export default class SignUpPage {
 
   displayConfirmPasswordError() {
     return this.confirmPasswordError;
-  }
-
-  displayEmailErrorEmpty() {
-    return this.emailError;
-  }
-
-  displayEmailErrorEmoji() {  
-    return this.emailError;
   }
 
   displayPasswordErrorEmpty() {
