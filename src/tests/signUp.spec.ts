@@ -881,7 +881,7 @@ test.describe('Verify sign up failed', () => {
 
         //expect display error message Password is required
         await test.step("Expect display password error message", async () => {
-        await expect(signupPage.displayPasswordErrorEmpty()).toContainText('Password is required.');
+        await expect(signupPage.displayPasswordError()).toContainText('Password is required.');
         });
            
 })

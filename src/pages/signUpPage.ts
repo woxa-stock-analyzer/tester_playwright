@@ -3,7 +3,7 @@
 
 import { Page, Locator } from '@playwright/test';
 
-// dfghjkl
+
 
 export default class SignUpPage {
   readonly page: Page;
@@ -188,9 +188,6 @@ export default class SignUpPage {
     return this.confirmPasswordError;
   }
 
-  displayPasswordErrorEmpty() {
-    return this.passwordError;
-  }
 
   displayNameFieldError() {
     return this.displayNameEmptyError;
