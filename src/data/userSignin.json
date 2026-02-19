@@ -1,11 +1,11 @@
 {
     "userLoginValid": {
-        "email": "a123@gmail.com",
+        "email": "test_login@gmail.com",
         "password": "1234567a"
     },
 
     "userLoginValidForLogout": {
-        "email": "a1234@gmail.com",
+        "email": "test_login@gmail.com",
         "password": "1234567a"
     },
 
