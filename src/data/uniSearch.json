@@ -1,0 +1,10 @@
+{
+    "valid_symbol":{
+        "full_symbol": "NVDA",
+        "some_symbol": "A"
+    },
+    "valid_company_name": {
+        "company_name": "Nvidia Corp"
+    }
+
+}

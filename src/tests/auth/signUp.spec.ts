@@ -12,7 +12,7 @@ test.describe('Verify sign up success', () =>{
         const email = signUp.valid_user_select_profile.email;
         const password = signUp.valid_user_select_profile.password;
         const confirm_password = signUp.valid_user_select_profile.confirm_password;
-        const dispaly_name = signUp.valid_user_select_profile.display_name;
+        const display_name = signUp.valid_user_select_profile.display_name;
 
         // go to https://stockanalyzer.adenxus.com/markets
         await test.step("Open markets page", async () => {
@@ -72,7 +72,7 @@ test.describe('Verify sign up success', () =>{
 
         // Fill displayname 
         await test.step("Fill display name", async () => {
-        await signupPage.fillDisplayName(dispaly_name);
+        await signupPage.fillDisplayName(display_name);
         });
 
         // click create account button
@@ -92,7 +92,7 @@ test.describe('Verify sign up success', () =>{
         const email = signUp.valid_user_no_select_profile.email;
         const password = signUp.valid_user_no_select_profile.password;
         const confirm_password = signUp.valid_user_no_select_profile.confirm_password;
-        const dispaly_name = signUp.valid_user_no_select_profile.display_name;
+        const display_name = signUp.valid_user_no_select_profile.display_name;
 
         // go to https://stockanalyzer.adenxus.com/markets
         await test.step("Go to markets page", async () => {
@@ -136,7 +136,7 @@ test.describe('Verify sign up success', () =>{
 
         // Fill displayname 
         await test.step("Fill display name", async () => {
-        await signupPage.fillDisplayName(dispaly_name);
+        await signupPage.fillDisplayName(display_name);
         });
 
         // click create account button
@@ -146,9 +146,9 @@ test.describe('Verify sign up success', () =>{
 
         // expect sign up success and redirect to market page
         await test.step("Expect display profile with no pic", async () => {
-        const firstChar = dispaly_name.trim().charAt(0).toUpperCase();
-        await expect(signupPage.displayProfileNoPic(dispaly_name)).toBeVisible();
-        await expect(signupPage.displayProfileNoPic(dispaly_name)).toHaveText(firstChar);
+        const firstChar = display_name.trim().charAt(0).toUpperCase();
+        await expect(signupPage.displayProfileNoPic(display_name)).toBeVisible();
+        await expect(signupPage.displayProfileNoPic(display_name)).toHaveText(firstChar);
         });
     });
 
@@ -160,7 +160,7 @@ test.describe('Verify sign up success', () =>{
         const email = signUp.valid_user_display_name_number.email;
         const password = signUp.valid_user_display_name_number.password;
         const confirm_password = signUp.valid_user_display_name_number.confirm_password;
-        const dispaly_name = signUp.valid_user_display_name_number.display_name ;
+        const display_name = signUp.valid_user_display_name_number.display_name ;
 
         // go to https://stockanalyzer.adenxus.com/markets
         await test.step("Go to markets page", async () => {
@@ -204,7 +204,7 @@ test.describe('Verify sign up success', () =>{
 
         // Fill displayname 
         await test.step("Fill display name", async () => {
-        await signupPage.fillDisplayName(dispaly_name);
+        await signupPage.fillDisplayName(display_name);
         });
 
         // click create account button
@@ -214,9 +214,9 @@ test.describe('Verify sign up success', () =>{
 
         // expect sign up success and redirect to market page
         await test.step("Expect display profile with no pic", async () => {
-        const firstChar = dispaly_name.trim().charAt(0).toUpperCase();
-        await expect(signupPage.displayProfileNoPic(dispaly_name)).toBeVisible();
-        await expect(signupPage.displayProfileNoPic(dispaly_name)).toHaveText(firstChar);
+        const firstChar = display_name.trim().charAt(0).toUpperCase();
+        await expect(signupPage.displayProfileNoPic(display_name)).toBeVisible();
+        await expect(signupPage.displayProfileNoPic(display_name)).toHaveText(firstChar);
         });
 
 });
@@ -228,7 +228,7 @@ test.describe('Verify sign up success', () =>{
         const email = signUp.valid_user_display_name_underscore.email;
         const password = signUp.valid_user_display_name_underscore.password;
         const confirm_password = signUp.valid_user_display_name_underscore.confirm_password;
-        const dispaly_name = signUp.valid_user_display_name_underscore.display_name ;
+        const display_name = signUp.valid_user_display_name_underscore.display_name ;
 
         // go to https://stockanalyzer.adenxus.com/markets
         await test.step("Go to markets page", async () => {
@@ -272,7 +272,7 @@ test.describe('Verify sign up success', () =>{
 
         // Fill displayname 
         await test.step("Fill display name", async () => {
-        await signupPage.fillDisplayName(dispaly_name);
+        await signupPage.fillDisplayName(display_name);
         });
 
         // click create account button
@@ -281,9 +281,9 @@ test.describe('Verify sign up success', () =>{
         });
 
         // expect sign up success and redirect to market page
-        const firstChar = dispaly_name.trim().charAt(0).toUpperCase();
-        await expect(signupPage.displayProfileNoPic(dispaly_name)).toBeVisible();
-        await expect(signupPage.displayProfileNoPic(dispaly_name)).toHaveText(firstChar);
+        const firstChar = display_name.trim().charAt(0).toUpperCase();
+        await expect(signupPage.displayProfileNoPic(display_name)).toBeVisible();
+        await expect(signupPage.displayProfileNoPic(display_name)).toHaveText(firstChar);
 });
 
 });
@@ -896,7 +896,7 @@ test.describe('Verify sign up failed in user setting', () => {
         const email = signUp.invalid_name_not_Eng.email;
         const password = signUp.invalid_name_not_Eng.password;
         const confirm_password = signUp.invalid_name_not_Eng.confirm_password;
-        const dispaly_name = signUp.invalid_name_not_Eng.display_name;
+        const display_name = signUp.invalid_name_not_Eng.display_name;
 
         // go to https://stockanalyzer.adenxus.com/markets
         await test.step("Go to markets page", async () => {
@@ -940,7 +940,7 @@ test.describe('Verify sign up failed in user setting', () => {
 
         // Fill displayname 
         await test.step("Fill display name", async () => {
-        await signupPage.fillDisplayName(dispaly_name);
+        await signupPage.fillDisplayName(display_name);
         });
 
         // click create account button
@@ -961,7 +961,7 @@ test.describe('Verify sign up failed in user setting', () => {
         const email = signUp.invalid_name_least_than_5.email;
         const password = signUp.invalid_name_least_than_5.password;
         const confirm_password = signUp.invalid_name_least_than_5.confirm_password;
-        const dispaly_name = signUp.invalid_name_least_than_5.display_name;
+        const display_name = signUp.invalid_name_least_than_5.display_name;
  // go to https://stockanalyzer.adenxus.com/markets
         await test.step("Go to markets page", async () => {
         await page.goto('https://stockanalyzer.adenxus.com/markets');
@@ -1004,7 +1004,7 @@ test.describe('Verify sign up failed in user setting', () => {
 
         // Fill displayname 
         await test.step("Fill display name", async () => {
-        await signupPage.fillDisplayName(dispaly_name);
+        await signupPage.fillDisplayName(display_name);
         });
 
         // click create account button
@@ -1025,7 +1025,7 @@ test.describe('Verify sign up failed in user setting', () => {
         const email = signUp.invalid_name_have_special_characters.email;
         const password = signUp.invalid_name_have_special_characters.password;
         const confirm_password = signUp.invalid_name_have_special_characters.confirm_password;
-        const dispaly_name = signUp.invalid_name_have_special_characters.display_name;
+        const display_name = signUp.invalid_name_have_special_characters.display_name;
 
         // go to https://stockanalyzer.adenxus.com/markets
         await test.step("Go to markets page", async () => {
@@ -1069,7 +1069,7 @@ test.describe('Verify sign up failed in user setting', () => {
 
         // Fill displayname 
         await test.step("Fill display name", async () => {
-        await signupPage.fillDisplayName(dispaly_name);
+        await signupPage.fillDisplayName(display_name);
         });
 
         // click create account button
@@ -1091,7 +1091,7 @@ test.describe('Verify sign up failed in user setting', () => {
         const email = signUp.invalid_name_empty.email;
         const password = signUp.invalid_name_empty.password;
         const confirm_password = signUp.invalid_name_empty.confirm_password;
-        const dispaly_name = signUp.invalid_name_empty.display_name;
+        const display_name = signUp.invalid_name_empty.display_name;
         // go to https://stockanalyzer.adenxus.com/markets
         await test.step("Go to markets page", async () => {
         await page.goto('https://stockanalyzer.adenxus.com/markets');
@@ -1134,7 +1134,7 @@ test.describe('Verify sign up failed in user setting', () => {
 
         // Fill displayname 
         await test.step("Fill display name", async () => {
-        await signupPage.fillDisplayName(dispaly_name);
+        await signupPage.fillDisplayName(display_name);
         });
 
         // click create account button
