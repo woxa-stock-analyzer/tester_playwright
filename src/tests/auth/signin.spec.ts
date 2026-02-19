@@ -33,6 +33,7 @@ test.describe("User sign in with valid", () => {
         User.userLoginValid.email,
         User.userLoginValid.password,
       );
+      await signIn.retryIfSessionNotReady();
     });
 
     // Verify sign in successful
@@ -80,6 +81,7 @@ test.describe("User sign in with invalid", () => {
         User.userLoginInvalid.email,
         User.userLoginValid.password,
       );
+      await signIn.retryIfSessionNotReady();
     });
 
     // Verify sign in failed
@@ -105,7 +107,10 @@ test.describe("User sign in with invalid", () => {
         User.userLoginValid.email,
         User.userLoginInvalid.password,
       );
+      await signIn.retryIfSessionNotReady();
     });
+
+     await page.waitForTimeout(1000);
 
     // Verify sign in failed
     await test.step("Verify sign in failed", async () => {

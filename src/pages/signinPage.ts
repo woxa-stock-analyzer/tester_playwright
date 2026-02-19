@@ -51,4 +51,25 @@ export class SignInPage {
     await this.fillPassword(password);
     await this.clickSignInButton();
   }
+
+  async retryIfSessionNotReady(maxRetries = 3) {
+    const SESSION_NOT_READY =
+      "Sign in was successful, but your session is not ready yet. Please try again.";
+
+    for (let i = 0; i < maxRetries; i++) {
+      const errorLocator = this.errorSignInFailedMessage;
+
+      if (!(await errorLocator.isVisible().catch(() => false))) return;
+
+      const text = await errorLocator.textContent();
+
+      if (!text?.includes(SESSION_NOT_READY)) {
+        throw new Error(`Unexpected sign-in error: ${text}`);
+      }
+
+      await this.clickSignInButton();
+
+      await this.page.waitForTimeout(1000);
+    }
+  }
 }

@@ -15,7 +15,7 @@ export class NavbarSection {
   get userAvatar(): Locator {
     return this.page
       .getByTestId("nav-user-menu")
-      .getByTestId("nav-user-initial");
+      .getByTestId("nav-user-avatar");
   }
 
   get signOutButton(): Locator {

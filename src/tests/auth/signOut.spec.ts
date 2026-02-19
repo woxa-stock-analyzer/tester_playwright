@@ -32,6 +32,7 @@ test.describe("User sign out success", () => {
         User.userLoginValidForLogout.email,
         User.userLoginValidForLogout.password,
       );
+      await signIn.retryIfSessionNotReady();
     });
 
     // Verify sign in successful
