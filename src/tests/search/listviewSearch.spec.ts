@@ -28,7 +28,6 @@ test.describe("User Search found", () => {
     // Wait for search loading
     await test.step("Wait for loading", async () => {
       await expect(market.rowLoading).not.toBeVisible();
-      await page.waitForLoadState()
     });
 
     // Verify result symbol contain keyword
@@ -72,7 +71,6 @@ test.describe("User Search not found", () => {
     // Wait for search loading
     await test.step("Wait for loading", async () => {
       await expect(market.rowLoading).not.toBeVisible();
-      await page.waitForLoadState()
     });
 
     // Verify error message is displayed
@@ -115,7 +113,6 @@ test.describe("User user filter", () => {
     // Wait for search loading
     await test.step("Wait for loading", async () => {
       await expect(market.rowLoading).not.toBeVisible();
-      await page.waitForLoadState()
     });
 
     // Verify result sector contain keyword
@@ -163,17 +160,13 @@ test.describe("User user filter", () => {
     // Wait for search loading
     await test.step("Wait for loading", async () => {
       await expect(market.rowLoading).not.toBeVisible();
-      await page.waitForLoadState()
     });
 
     // Verify result price range
     await test.step("Verify price range", async () => {
       const prices = await market.getAllPrices();
 
-      for (const price of prices) {
-        expect(price).toBeGreaterThanOrEqual(0);
-        expect(price).toBeLessThanOrEqual(50);
-      }
+      expect(prices.every((p) => p >= 0 && p <= 50)).toBeTruthy();
     });
   });
 
@@ -204,7 +197,6 @@ test.describe("User user filter", () => {
     // Wait for search loading
     await test.step("Wait for loading", async () => {
       await expect(market.rowLoading).not.toBeVisible();
-      await page.waitForLoadState()
     });
 
     // Verify result %Change contain keyword
@@ -254,12 +246,234 @@ test.describe("User user filter", () => {
     // Wait for search loading
     await test.step("Wait for loading", async () => {
       await expect(market.rowLoading).not.toBeVisible();
-      await page.waitForLoadState()
     });
 
     // Verify error message is displayed
     await test.step("Verify error message when no data found", async () => {
       await expect(market.errorMessageNotFound).toBeVisible();
+    });
+  });
+});
+
+test.describe("User use sort function", () => {
+  test("Sort-001 User sort Symbol, Company name, Sector when it not active", async ({
+    page,
+  }) => {
+    //   Enter markets page (Homepage of website)
+    await test.step("Go to markets page", async () => {
+      await market.goToMarketsPage();
+    });
+
+    // wait for API/network to finish
+    await market.page.waitForLoadState("networkidle");
+
+    // Wait for search loading
+    await test.step("Wait for loading", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+    });
+
+    //   Click symbol header
+    await test.step("Click symbol to sort", async () => {
+      await market.symbolHeaderClick();
+    });
+
+    // Verify symbol sort by ascending
+    await test.step("Verify symbol sort ascending", async () => {
+      const symbols = await market.getAllSymbolTexts();
+
+      const sorted = [...symbols].sort((a, b) => a.localeCompare(b));
+
+      expect(symbols).toEqual(sorted);
+    });
+
+    //   Click company name header
+    await test.step("Click company name to sort", async () => {
+      await market.companyNameHeaderClick();
+    });
+
+    // Verify company name sort by ascending
+    await test.step("Verify company name sort ascending", async () => {
+      const companyName = await market.getAllCompanyNameTexts();
+
+      const sorted = [...companyName].sort((a, b) => a.localeCompare(b));
+
+      expect(companyName).toEqual(sorted);
+    });
+  });
+
+  test("Sort-002 User sort Symbol, Company name, Sector when it already active", async ({
+    page,
+  }) => {
+    //   Enter markets page (Homepage of website)
+    await test.step("Go to markets page", async () => {
+      await market.goToMarketsPage();
+    });
+
+    // wait for API/network to finish
+    await market.page.waitForLoadState("networkidle");
+
+    // Wait for search loading
+    await test.step("Wait for loading", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+    });
+
+    //   Click symbol header
+    await test.step("Click symbol to sort", async () => {
+      await market.symbolHeaderClick();
+    });
+
+    //   Click symbol header
+    await test.step("Click symbol to sort", async () => {
+      await market.symbolHeaderClick();
+    });
+
+    // Verify symbol sort by ascending
+    await test.step("Verify symbol sort descending", async () => {
+      const symbols = await market.getAllSymbolTexts();
+
+      const sorted = [...symbols].sort((a, b) => b.localeCompare(a));
+
+      expect(symbols).toEqual(sorted);
+    });
+
+    //   Click company name header
+    await test.step("Click company name to sort", async () => {
+      await market.companyNameHeaderClick();
+    });
+
+    //   Click company name header
+    await test.step("Click company name to sort", async () => {
+      await market.companyNameHeaderClick();
+    });
+
+    // Verify company name sort by ascending
+    await test.step("Verify company name sort descending", async () => {
+      const companyName = await market.getAllCompanyNameTexts();
+
+      const expected = [...companyName].sort((a, b) =>
+        b.localeCompare(a, "en", { sensitivity: "base" }),
+      );
+
+      expect(companyName).toEqual(expected);
+    });
+  });
+
+  test("Sort-003 User sort Price, %Change, Volume when it not active", async ({
+    page,
+  }) => {
+    //   Enter markets page (Homepage of website)
+    await test.step("Go to markets page", async () => {
+      await market.goToMarketsPage();
+    });
+
+    // wait for API/network to finish
+    await market.page.waitForLoadState("networkidle");
+
+    // Wait for search loading
+    await test.step("Wait for loading", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+    });
+
+    //   Click price header
+    await test.step("Click price to sort", async () => {
+      await market.priceHeaderClick();
+    });
+
+    // Verify price sort by ascending
+    await test.step("Verify price range", async () => {
+      const prices = await market.getAllPrices();
+
+      const sorted = [...prices].sort((a, b) => a - b);
+
+      expect(prices).toEqual(sorted);
+    });
+
+    //   Click %Change header
+    await test.step("Click %Change to sort", async () => {
+      await market.percentChangeHeaderClick();
+    });
+
+    // Verify percent change sort ascending
+    await test.step("Verify percent change ascending and color", async () => {
+      await market.verifyPercentChangeSortingAndColor("asc");
+    });
+
+    //   Click volume header
+    await test.step("Click volume to sort", async () => {
+      await market.volumeHeaderClick();
+    });
+
+    // Verify volume sort by ascending
+    await test.step("Verify volume sorted ascending", async () => {
+      const volumes = await market.getAllVolumeValues();
+
+      const sorted = [...volumes].sort((a, b) => a - b);
+
+      expect(volumes).toEqual(sorted);
+    });
+  });
+
+  test("Sort-004 User sort Price, %Change, Volume when it already active (descending)", async ({
+    page,
+  }) => {
+    // Enter markets page
+    await test.step("Go to markets page", async () => {
+      await market.goToMarketsPage();
+    });
+
+    // wait for API/network to finish
+    await market.page.waitForLoadState("networkidle");
+
+    // Wait for loading spinner
+    await test.step("Wait for loading", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+    });
+
+    // ======================
+    // PRICE DESCENDING
+    // ======================
+
+    await test.step("Click price header twice to sort descending", async () => {
+      await market.priceHeaderClick(); // asc
+      await market.priceHeaderClick(); // desc
+    });
+
+    await test.step("Verify price sorted descending", async () => {
+      const prices = await market.getAllPrices();
+
+      const sorted = [...prices].sort((a, b) => b - a);
+
+      expect(prices).toEqual(sorted);
+    });
+
+    // ======================
+    // % CHANGE DESCENDING
+    // ======================
+
+    await test.step("Click %Change header twice to sort descending", async () => {
+      await market.percentChangeHeaderClick(); // asc
+      await market.percentChangeHeaderClick(); // desc
+    });
+
+    await test.step("Verify percent change sorted descending and color", async () => {
+      await market.verifyPercentChangeSortingAndColor("desc");
+    });
+
+    // ======================
+    // VOLUME DESCENDING
+    // ======================
+
+    await test.step("Click volume header twice to sort descending", async () => {
+      await market.volumeHeaderClick(); // asc
+      await market.volumeHeaderClick(); // desc
+    });
+
+    await test.step("Verify volume sorted descending", async () => {
+      const volumes = await market.getAllVolumeValues();
+
+      const sorted = [...volumes].sort((a, b) => b - a);
+
+      expect(volumes).toEqual(sorted);
     });
   });
 });

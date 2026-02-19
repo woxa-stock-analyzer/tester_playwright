@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
 export class MarketPage {
   readonly page: Page;
@@ -51,8 +51,8 @@ export class MarketPage {
     return this.page.getByRole("button", { name: "Price" });
   }
 
-   get priceCloseButton(): Locator {
-    return this.page.getByRole('button', { name: 'Price', exact: true });
+  get priceCloseButton(): Locator {
+    return this.page.getByRole("button", { name: "Price", exact: true });
   }
 
   get priceRangeButton(): Locator {
@@ -78,11 +78,47 @@ export class MarketPage {
   }
 
   get priceMin(): Locator {
-    return this.page.getByTestId('price-dropdown-min-input').first();
+    return this.page.getByTestId("price-dropdown-min-input").first();
   }
 
   get priceMax(): Locator {
-    return this.page.getByTestId('price-dropdown-max-input').first();
+    return this.page.getByTestId("price-dropdown-max-input").first();
+  }
+
+  get symbolHeader(): Locator {
+    return this.page.getByTestId("market-list-head-symbol");
+  }
+
+  get AllSymbolCells(): Locator {
+    return this.page.locator('[data-testid^="market-list-symbol-"]');
+  }
+
+  get companyNameHeader(): Locator {
+    return this.page.getByTestId("market-list-head-company");
+  }
+
+  get AllCompanyNameCells(): Locator {
+    return this.page.locator('[data-testid^="market-list-cell-company-"]');
+  }
+
+  get priceHeader(): Locator {
+    return this.page.getByTestId("market-list-head-price");
+  }
+
+  get percentChangeHeader(): Locator {
+    return this.page.getByTestId("market-list-head-change");
+  }
+
+  get volumeHeader(): Locator {
+    return this.page.getByTestId("market-list-head-volume");
+  }
+
+  get AllPercentChangeCell(): Locator {
+    return this.page.locator('[data-testid^="market-list-cell-change-"] span');
+  }
+
+  get AllVolumeCell(): Locator {
+    return this.page.locator('[data-testid^="market-list-volume-"] span');
   }
 
   //   ===== ACTIONS =====
@@ -162,9 +198,105 @@ export class MarketPage {
 
   async fillMinPrice(keyword: string) {
     await this.priceMin.fill(keyword);
-  } 
+  }
 
   async fillMaxPrice(keyword: string) {
     await this.priceMax.fill(keyword);
-  } 
+  }
+
+  async symbolHeaderClick() {
+    await this.symbolHeader.click();
+  }
+
+  async getAllSymbolTexts(): Promise<string[]> {
+    const texts = await this.AllSymbolCells.allTextContents();
+    return texts.map((t) => t.trim());
+  }
+
+  async companyNameHeaderClick() {
+    await this.companyNameHeader.click();
+  }
+
+  async getAllCompanyNameTexts(): Promise<string[]> {
+    const texts = await this.AllCompanyNameCells.allTextContents();
+    return texts.map((t) => t.trim());
+  }
+
+  async priceHeaderClick() {
+    await this.priceHeader.click();
+  }
+
+  async percentChangeHeaderClick() {
+    await this.percentChangeHeader.click();
+  }
+
+  async getAllPercentChangeValues(): Promise<number[]> {
+    const texts = await this.AllPercentChangeCell.allTextContents();
+
+    return texts.map((text) => Number(text.replace("%", "").trim()));
+  }
+
+  async verifyPercentChangeSortingAndColor(order: "asc" | "desc") {
+    const cells = this.page.locator(
+      '[data-testid^="market-list-cell-change-"]',
+    );
+
+    const count = await cells.count();
+    const values: number[] = [];
+
+    for (let i = 0; i < count; i++) {
+      const cell = cells.nth(i);
+      const valueElement = cell.locator(":scope >> *").first();
+
+      const text = await valueElement.textContent();
+      let value = Number(text!.replace("%", "").trim());
+
+      const className = await valueElement.getAttribute("class");
+
+      // determine sign from class
+      if (className?.includes("text-error-500")) {
+        value = -value;
+      }
+
+      values.push(value);
+    }
+
+    // verify sorting
+    const sorted = [...values].sort((a, b) =>
+      order === "asc" ? a - b : b - a,
+    );
+
+    expect(values).toEqual(sorted);
+  }
+
+  async volumeHeaderClick() {
+    await this.volumeHeader.click();
+  }
+
+  parseVolume(text: string): number {
+    const value = parseFloat(text);
+
+    if (text.includes("K")) return value * 1_000;
+    if (text.includes("M")) return value * 1_000_000;
+    if (text.includes("B")) return value * 1_000_000_000;
+
+    return value;
+  }
+
+  async getAllVolumeValues(): Promise<number[]> {
+    const cells = this.AllVolumeCell;
+    const count = await cells.count();
+
+    const volumes: number[] = [];
+
+    for (let i = 0; i < count; i++) {
+      const ariaText = await cells.nth(i).getAttribute("aria-text");
+
+      if (!ariaText) continue;
+
+      volumes.push(this.parseVolume(ariaText));
+    }
+
+    return volumes;
+  }
 }
