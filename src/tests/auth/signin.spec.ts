@@ -36,6 +36,10 @@ test.describe("User sign in with valid", () => {
       await signIn.retryIfSessionNotReady();
     });
 
+    await test.step("Wait for loading", async () => {
+      await page.waitForLoadState("networkidle");
+    });
+
     // Verify sign in successful
     await test.step("Verify sign in successful", async () => {
       await expect(navbar.userAvatar).toBeVisible();
@@ -54,6 +58,10 @@ test.describe("User sign in with valid", () => {
     // Click confirm sign out
     await test.step("Click confirm sign out", async () => {
       await navbar.clickConfirmSignOutButton();
+    });
+
+    await test.step("Wait for loading", async () => {
+      await page.waitForLoadState("networkidle");
     });
 
     // Verify user has been sign out
@@ -84,6 +92,10 @@ test.describe("User sign in with invalid", () => {
       await signIn.retryIfSessionNotReady();
     });
 
+    await test.step("Wait for loading", async () => {
+      await page.waitForLoadState("networkidle");
+    });
+
     // Verify sign in failed
     await test.step("Verify sign in failed", async () => {
       await expect(signIn.errorSignInFailedMessage).toBeVisible();
@@ -110,7 +122,9 @@ test.describe("User sign in with invalid", () => {
       await signIn.retryIfSessionNotReady();
     });
 
-     await page.waitForTimeout(1000);
+    await test.step("Wait for loading", async () => {
+      await page.waitForLoadState("networkidle");
+    });
 
     // Verify sign in failed
     await test.step("Verify sign in failed", async () => {

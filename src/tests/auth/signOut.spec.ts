@@ -35,6 +35,10 @@ test.describe("User sign out success", () => {
       await signIn.retryIfSessionNotReady();
     });
 
+    await test.step("Wait for loading", async () => {
+      await page.waitForLoadState("networkidle");
+    });
+
     // Verify sign in successful
     await test.step("Verify sign in successful", async () => {
       await expect(navbar.userAvatar).toBeVisible();
