@@ -96,23 +96,28 @@ test.describe('User search with valid value', () => {
         await navbarSection.searchbar.fill(symbol);
         });
 
-await test.step('Verify symbols sorted A-Z', async () => {
-  await expect(navbarSection.searchDropdown).toBeVisible();
+        await test.step('Verify symbols sorted A-Z', async () => {
+        await expect(navbarSection.searchDropdown).toBeVisible();
 
-  // รอให้ result โผล่
-  await expect(navbarSection.symbol.first()).toBeVisible();
+        // รอให้ result โผล่
+        await expect(navbarSection.symbol.first()).toBeVisible();
 
-  const symbols = await navbarSection.symbol.allTextContents();
+        const symbols = await navbarSection.symbol.allTextContents();
 
-  const sorted = [...symbols].sort((a, b) =>
-    a.localeCompare(b, 'en', { sensitivity: 'base' })
-  );
+        const sorted = [...symbols].sort((a, b) =>
+        a.localeCompare(b, 'en', { sensitivity: 'base' })
+        );
 
-  expect(symbols).toEqual(sorted);
-});
-
-
+        expect(symbols).toEqual(sorted);
+        });
         })
+
+
+
+
+
+
+        
     });
 
 
