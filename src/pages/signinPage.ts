@@ -33,9 +33,17 @@ export class SignInPage {
   }
 
   async clickSignInButton() {
+    await expect(this.signInButton).toBeEnabled();
     await this.signInButton.click();
   }
 
+  async getEmailValue() {
+    return await this.emailInput.inputValue();
+  }
+
+  async getPasswordValue() {
+    return await this.passwordInput.inputValue();
+  }
 
   //   ===== FLOW ACTIONS =====
   async signIn(email: string, password: string) {

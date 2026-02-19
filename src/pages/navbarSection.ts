@@ -1,14 +1,14 @@
 import { Locator, Page } from "@playwright/test";
 
-export class NavbarPage {
+export class NavbarSection {
   readonly page: Page;
 
   constructor(page: Page) {
     this.page = page;
   }
 
-//   ===== LOCATORS =====
-  get guestUserAvater(): Locator {
+  //   ===== LOCATORS =====
+  get guestUserAvatar(): Locator {
     return this.page.getByTestId("nav-signin-desktop");
   }
 
@@ -23,12 +23,12 @@ export class NavbarPage {
   }
 
   get confirmSignOutButton(): Locator {
-    return this.page.getByTestId('logout-dialog-confirm');
+    return this.page.getByTestId("logout-dialog-confirm");
   }
 
   //   ===== ACTIONS =====
   async clickGuestUserAvatar() {
-    await this.guestUserAvater.click();
+    await this.guestUserAvatar.click();
   }
 
   async clickUserAvatar() {
@@ -41,5 +41,9 @@ export class NavbarPage {
 
   async clickConfirmSignOutButton() {
     await this.confirmSignOutButton.click();
+  }
+
+  async waitForUserAvatar() {
+    await this.userAvatar.waitFor({ state: "visible" });
   }
 }
