@@ -3,31 +3,31 @@
         "email": "Bynie@gmail.com",
         "password": "mimi123456789",
         "confirm_password": "mimi123456789",
-        "dispaly_name": "Bynie"
+        "display_name": "Bynie"
     },
       "valid_user_no_select_profile": {
         "email": "Feddy@gmail.com",
         "password": "mumu123456789",
         "confirm_password": "mumu123456789",
-        "dispaly_name": "Feddy"
+        "display_name": "Feddy"
     },
         "valid_user_eye_icon": {
         "email": "sunny@gmail.com",
         "password": "sun123456789",
         "confirm_password": "sun123456789",
-        "dispaly_name": "SunEyeIcon"
+        "display_name": "SunEyeIcon"
     },
     "valid_user_display_name_number": {
         "email": "IoI@gmail.com",
         "password": "woxa123456789",
         "confirm_password": "woxa123456789",
-        "dispaly_name": "IoI123"
+        "display_name": "IoI123"
     },
     "valid_user_display_name_underscore": {
         "email": "Zanddy@gmail.com",
         "password": "soda123456789",
         "confirm_password": "soda123456789",
-        "dispaly_name": "Zanddy_zz"
+        "display_name": "Zanddy_zz"
     },
 
 
@@ -94,25 +94,25 @@
         "email": "catcat@gmail.com",
         "password": "woxa1234567",
         "confirm_password": "woxa1234567",
-        "dispaly_name": "แมวเหมียว"
+        "display_name": "แมวเหมียว"
     },
         "invalid_name_least_than_5": {
         "email": "catcat@gmail.com",
         "password": "woxa1234567",
         "confirm_password": "woxa1234567",
-        "dispaly_name": "cat"
+        "display_name": "cat"
     },
         "invalid_name_have_special_characters": {
         "email": "catcat@gmail.com",
         "password": "woxa1234567",
         "confirm_password": "woxa1234567",
-        "dispaly_name": "cat!@#$%^&*"
+        "display_name": "cat!@#$%^&*"
     },
         "invalid_name_empty": {
         "email": "catcat@gmail.com",
         "password": "woxa1234567",
         "confirm_password": "woxa1234567",
-        "dispaly_name": ""
+        "display_name": ""
     }
 
 }
