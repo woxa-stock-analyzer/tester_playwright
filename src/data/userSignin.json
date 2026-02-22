@@ -1,0 +1,21 @@
+{
+    "userLoginValid": {
+        "email": "test_login@gmail.com",
+        "password": "1234567a"
+    },
+
+    "userLoginValidForLogout": {
+        "email": "test_login@gmail.com",
+        "password": "1234567a"
+    },
+
+    "userLoginInvalid": {
+        "email": "failed@gmail.com",
+        "password": "123456789"
+    },
+
+     "userLoginInvalidInput": {
+        "email": "failed😊😊@gmail.com",
+        "password": "12345678😊😊😊😊😊😊"
+    }
+}

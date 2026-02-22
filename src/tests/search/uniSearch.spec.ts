@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import NavbarSection from '../../pages/navbarSection';
+import {NavbarSection} from '../../pages/navbarSection';
 import uniSearchData from '../../data/uniSearch.json';
 
 test.describe('User search with valid value', () => {
