@@ -22,16 +22,10 @@ test.describe("User Search found", () => {
       await market.fillSearch(Search.keyword);
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     // Verify result symbol contain keyword
     await test.step("Verify search result symbol", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+
       await expect(
         market.getSymbolCellContains(Search.keyword).first(),
       ).toBeVisible();
@@ -65,16 +59,10 @@ test.describe("User Search not found", () => {
       await market.fillSearch(Search.keywordNotFound);
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     // Verify error message is displayed
     await test.step("Verify error message when no data found", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+
       await expect(market.errorMessageNotFound).toBeVisible();
     });
   });
@@ -107,16 +95,11 @@ test.describe("User user filter", () => {
       await market.clickSectorCloseButton();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     // Verify result sector contain keyword
     await test.step("Verify search result sector", async () => {
+            await expect(market.rowLoading).not.toBeVisible();
+
+
       await expect(
         market.getSectorCellContains(Search.sector).first(),
       ).toBeVisible();
@@ -154,16 +137,10 @@ test.describe("User user filter", () => {
       await market.clickPriceButton();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     // Verify result price range
     await test.step("Verify price range", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+
       const prices = await market.getAllPrices();
 
       expect(prices.every((p) => p >= 0 && p <= 50)).toBeTruthy();
@@ -191,16 +168,10 @@ test.describe("User user filter", () => {
       await market.clickPercentChangeSelectButton();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     // Verify result %Change contain keyword
     await test.step("Verify search result %Change above 5%", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+
       const values = await market.getChangePercentages();
 
       for (const value of values) {
@@ -240,16 +211,10 @@ test.describe("User user filter", () => {
       await market.clickPriceCloseButton();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     // Verify error message is displayed
     await test.step("Verify error message when no data found", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+
       await expect(market.errorMessageNotFound).toBeVisible();
     });
   });
@@ -264,14 +229,6 @@ test.describe("User use sort function", () => {
       await market.goToMarketsPage();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     //   Click symbol header
     await test.step("Click symbol to sort", async () => {
       await market.symbolHeaderClick();
@@ -279,6 +236,8 @@ test.describe("User use sort function", () => {
 
     // Verify symbol sort by ascending
     await test.step("Verify symbol sort ascending", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+
       const symbols = await market.getAllSymbolTexts();
 
       const sorted = [...symbols].sort((a, b) => a.localeCompare(b));
@@ -309,14 +268,6 @@ test.describe("User use sort function", () => {
       await market.goToMarketsPage();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     //   Click symbol header
     await test.step("Click symbol to sort", async () => {
       await market.symbolHeaderClick();
@@ -329,6 +280,8 @@ test.describe("User use sort function", () => {
 
     // Verify symbol sort by ascending
     await test.step("Verify symbol sort descending", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+
       const symbols = await market.getAllSymbolTexts();
 
       const sorted = [...symbols].sort((a, b) => b.localeCompare(a));
@@ -366,14 +319,6 @@ test.describe("User use sort function", () => {
       await market.goToMarketsPage();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     //   Click price header
     await test.step("Click price to sort", async () => {
       await market.priceHeaderClick();
@@ -381,6 +326,8 @@ test.describe("User use sort function", () => {
 
     // Verify price sort by ascending
     await test.step("Verify price range", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+
       const prices = await market.getAllPrices();
 
       const sorted = [...prices].sort((a, b) => a - b);
@@ -421,14 +368,6 @@ test.describe("User use sort function", () => {
       await market.goToMarketsPage();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
-    // Wait for loading spinner
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
     // ======================
     // PRICE DESCENDING
     // ======================
@@ -439,6 +378,8 @@ test.describe("User use sort function", () => {
     });
 
     await test.step("Verify price sorted descending", async () => {
+      await expect(market.rowLoading).not.toBeVisible();
+
       const prices = await market.getAllPrices();
 
       const sorted = [...prices].sort((a, b) => b - a);
