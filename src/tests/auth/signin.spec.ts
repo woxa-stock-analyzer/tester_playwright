@@ -33,6 +33,7 @@ test.describe("User sign in with valid", () => {
         User.userLoginValid.email,
         User.userLoginValid.password,
       );
+      await signIn.retryIfSessionNotReady();
     });
 
     await test.step("Wait for loading", async () => {
@@ -88,6 +89,7 @@ test.describe("User sign in with invalid", () => {
         User.userLoginInvalid.email,
         User.userLoginValid.password,
       );
+      await signIn.retryIfSessionNotReady();
     });
 
     await test.step("Wait for loading", async () => {
@@ -117,6 +119,7 @@ test.describe("User sign in with invalid", () => {
         User.userLoginValid.email,
         User.userLoginInvalid.password,
       );
+      await signIn.retryIfSessionNotReady();
     });
 
     await test.step("Wait for loading", async () => {
