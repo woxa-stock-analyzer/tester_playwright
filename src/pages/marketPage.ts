@@ -7,6 +7,10 @@ export class MarketPage {
     this.page = page;
   }
   //   ===== LOCATORS =====
+  get watchlistButton(): Locator{
+    return this.page.getByTestId('nav-link-watchlist')
+  }
+
   get searchBar(): Locator {
     return this.page.getByTestId("searches-input-field");
   }
@@ -124,6 +128,10 @@ export class MarketPage {
   //   ===== ACTIONS =====
   async goToMarketsPage() {
     await this.page.goto("https://stockanalyzer.adenxus.com/markets");
+  }
+
+  async goToWatchlistPage() {
+    await this.watchlistButton.click();
   }
 
   async fillSearch(keyword: string) {
