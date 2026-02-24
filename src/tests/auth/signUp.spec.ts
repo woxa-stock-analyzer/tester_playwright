@@ -962,7 +962,7 @@ test.describe('Verify sign up failed in user setting', () => {
         const password = signUp.invalid_name_least_than_5.password;
         const confirm_password = signUp.invalid_name_least_than_5.confirm_password;
         const display_name = signUp.invalid_name_least_than_5.display_name;
- // go to https://stockanalyzer.adenxus.com/markets
+        // go to https://stockanalyzer.adenxus.com/markets
         await test.step("Go to markets page", async () => {
         await page.goto('https://stockanalyzer.adenxus.com/markets');
         });
