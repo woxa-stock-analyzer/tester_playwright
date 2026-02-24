@@ -23,8 +23,10 @@ test.describe("User sign out success", () => {
 
     // Open sign in modal
     await test.step("Open sign in modal", async () => {
-      await navbar.clickGuestUserAvatar();
-    });
+          await navbar.clickGuestUserAvatar();
+          await navbar.clickSignInButton();
+        });
+    
 
     // Sign in with valid user
     await test.step("Sign in with valid user", async () => {
@@ -37,6 +39,7 @@ test.describe("User sign out success", () => {
 
     // Verify sign in successful
     await test.step("Verify sign in successful", async () => {
+      await navbar.clickGuestUserAvatar();
       await expect(navbar.userAvatar).toBeVisible();
     });
 
@@ -57,7 +60,8 @@ test.describe("User sign out success", () => {
 
     // Verify user has been sign out
     await test.step("Verify user has been sign out", async () => {
-      await expect(navbar.guestUserAvatar).toBeVisible();
+      await navbar.clickGuestUserAvatar();
+      await expect(navbar.userAvatar).not.toBeVisible();
     });
   });
 });

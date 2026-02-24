@@ -8,40 +8,48 @@ export class WatchlistPage {
   }
 
   //   ===== LOCATORS =====
-  get watchlistAddButton(): Locator{
+  get watchlistAddButton(): Locator {
     return this.page.getByTestId("watchlist-add-button");
   }
 
-  get searchField(): Locator{
-    return this.page.getByTestId('searches-input-field');
+  get searchField(): Locator {
+    return this.page.getByTestId("searches-input-field");
   }
 
-  get searchResult(): Locator{
-    return this.page.getByTestId('watchlist-search-symbol-NVDA');
+  get searchResult(): Locator {
+    return this.page.getByTestId("watchlist-search-symbol-NVDA");
   }
 
-  get stockBookMarkIconWatchlist(): Locator{
-    return this.page.getByTestId('watchlist-search-add-button-NVDA');
+  get stockBookMarkIconWatchlist(): Locator {
+    return this.page.getByTestId("watchlist-search-add-button-NVDA");
   }
 
-  get watchlistSymbolNvda(): Locator{
-    return this.page.getByTestId('watchlist-symbol-NVDA');
+  get watchlistSymbolNvda(): Locator {
+    return this.page.getByTestId("watchlist-symbol-NVDA");
   }
 
-  get stockBookMarkIconListView(): Locator{
-    return this.page.getByTestId('market-list-bookmark-button-AAPL');
+  get stockBookMarkIconListView(): Locator {
+    return this.page.getByTestId("market-list-bookmark-button-AAPL");
   }
 
-  get watchlistSymbolAapl(): Locator{
-    return this.page.getByTestId('watchlist-symbol-AAPL');
+  get watchlistSymbolAapl(): Locator {
+    return this.page.getByTestId("watchlist-symbol-AAPL");
   }
 
-  get watchlistSymbolIntc(): Locator{
-    return this.page.getByTestId('watchlist-symbol-INTC');
+  get watchlistSymbolIntc(): Locator {
+    return this.page.getByTestId("watchlist-symbol-INTC");
   }
 
-  get stockSymbolResult(): Locator{
-    return this.page.getByTestId('market-list-symbol-INTC');
+  get stockSymbolResult(): Locator {
+    return this.page.getByTestId("market-list-symbol-INTC");
+  }
+
+  get watchListRow(): Locator {
+    return this.page.locator('[data-testid^="watchlist-row-"]');
+  }
+
+  get removeButton(): Locator {
+    return this.page.locator('[data-testid^="watchlist-remove-icon-"]');
   }
   //   ===== ACTIONS =====
   async watchlistAddButtonClick() {
@@ -49,7 +57,7 @@ export class WatchlistPage {
   }
 
   async fillSearchField(keyword: string) {
-    return this.searchField.type(keyword, { delay: 50 });;
+    return this.searchField.type(keyword, { delay: 50 });
   }
 
   async clickStockBookMarkIconWathclist() {

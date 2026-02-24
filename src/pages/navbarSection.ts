@@ -9,13 +9,15 @@ export class NavbarSection {
 
   //   ===== LOCATORS =====
   get guestUserAvatar(): Locator {
-    return this.page.getByTestId("nav-signin-desktop");
+    return this.page.getByTestId("nav-user-desktop");
+  }
+
+  get signInButton(): Locator {
+    return this.page.getByTestId("signin-dropdown-submit");
   }
 
   get userAvatar(): Locator {
-    return this.page
-      .getByTestId("nav-user-menu")
-      .getByTestId("nav-user-avatar");
+    return this.page.getByTestId('nav-user-header-avatar');
   }
 
   get signOutButton(): Locator {
@@ -33,6 +35,10 @@ export class NavbarSection {
 
   async clickUserAvatar() {
     await this.userAvatar.click();
+  }
+
+  async clickSignInButton() {
+    await this.signInButton.click();
   }
 
   async clickSignOutButton() {
