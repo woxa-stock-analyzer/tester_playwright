@@ -3,17 +3,27 @@ import NavbarSection from '../../pages/navbarSection';
 import uniSearchData from '../../data/uniSearch.json';
 
 test.describe('User search with valid value', () => {
+
+let navbarSection: NavbarSection;
+
+  test.beforeEach(async ({ page }) => {
+    navbarSection = new NavbarSection(page);
+
+    //Enter website
+    await test.step('Open markets page', async () => {
+    await page.goto('https://stockanalyzer.adenxus.com/markets');
+    });
+    //Click Search bar
+    await test.step('Click Search bar', async () => {
+    await navbarSection.clickSearchBar();
+    });
+  });
+
+
+
     test('User search found company name only', async ({ page }) => {
         const navbarSection = new NavbarSection(page);
         const company_name = uniSearchData.valid_company_name.company_name;
-
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
 
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(company_name);
@@ -30,14 +40,6 @@ test.describe('User search with valid value', () => {
     test('User search found symbol only', async ({ page }) => {
         const navbarSection = new NavbarSection(page);
         const symbol = uniSearchData.valid_symbol.full_symbol;
-
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
 
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(symbol);
@@ -56,21 +58,12 @@ test.describe('User search with valid value', () => {
         const navbarSection = new NavbarSection(page);
         const symbol = uniSearchData.valid_symbol.some_symbol;
 
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
-
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(symbol);
         });
 
         await test.step('Verify search results have A letter', async () => {
         await expect(navbarSection.displaysearchDropdown()).toBeVisible();
-        await page.waitForTimeout(1000);
         await expect(navbarSection.displaysearchDropdown()).toContainText(/a/i);
         });
 
@@ -79,18 +72,26 @@ test.describe('User search with valid value', () => {
 
 
     test.describe('Search Logic', () => {
+
+        let navbarSection: NavbarSection;
+
+        test.beforeEach(async ({ page }) => {
+         navbarSection = new NavbarSection(page);
+
+        //Enter website
+        await test.step('Open markets page', async () => {
+        await page.goto('https://stockanalyzer.adenxus.com/markets');
+        });
+        //Click Search bar
+        await test.step('Click Search bar', async () => {
+        await navbarSection.clickSearchBar();
+        });
+        });
+
         test('User search with valid data  the result sort', async ({ page }) => {
 
         const navbarSection = new NavbarSection(page);  
         const symbol = uniSearchData.valid_symbol.some_symbol;
-
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
 
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(symbol);
@@ -107,14 +108,6 @@ test.describe('User search with valid value', () => {
         const navbarSection = new NavbarSection(page);  
         const symbol = uniSearchData.valid_symbol.patail_symbol;
 
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
-
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(symbol);
         });
@@ -129,14 +122,6 @@ test.describe('User search with valid value', () => {
         test('Users can search with case-insensitive keywords with nvda', async ({ page }) => {
         const navbarSection = new NavbarSection(page);
         const symbol = uniSearchData.valid_symbol.sensitive_case1;
-
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
 
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(symbol);
@@ -154,14 +139,6 @@ test.describe('User search with valid value', () => {
         const navbarSection = new NavbarSection(page);
         const symbol = uniSearchData.valid_symbol.sensitive_case2;
 
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
-
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(symbol);
         });
@@ -176,14 +153,6 @@ test.describe('User search with valid value', () => {
         test('Users can search with case-insensitive keywords with NVDA', async ({ page }) => {
         const navbarSection = new NavbarSection(page);
         const symbol = uniSearchData.valid_symbol.sensitive_case3;
-
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
 
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(symbol);
@@ -201,14 +170,6 @@ test.describe('User search with valid value', () => {
         const navbarSection = new NavbarSection(page);
         const whitespace = uniSearchData.invalid_input.whitespace;
 
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
-
         await test.step('Fill whitespace', async () => {
         await navbarSection.searchbar.fill(whitespace);
         });
@@ -223,14 +184,6 @@ test.describe('User search with valid value', () => {
         test('User search with invalid input symbol have whitespace', async ({ page }) => {
         const navbarSection = new NavbarSection(page);
         const symbol_with_whitespace = uniSearchData.invalid_input.symbolHaveWhitespace;
-
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
 
         await test.step('Fill symbol_with_whitespace', async () => {
         await navbarSection.searchbar.fill(symbol_with_whitespace);
@@ -249,14 +202,6 @@ test.describe('User search with valid value', () => {
         const navbarSection = new NavbarSection(page);
         const emoji = uniSearchData.invalid_input.Emoji;
 
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
-
         await test.step('Fill emoji', async () => {
         await navbarSection.searchbar.fill(emoji);
         });
@@ -273,14 +218,6 @@ test.describe('User search with valid value', () => {
         const navbarSection = new NavbarSection(page);
         const special_char = uniSearchData.invalid_input.special_character;
 
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
-
         await test.step('Fill special character', async () => {
         await navbarSection.searchbar.fill(special_char);
         });
@@ -295,20 +232,28 @@ test.describe('User search with valid value', () => {
 
 })
 
-        test.describe('Verify clear search data', () => {
+    test.describe('Verify clear search data', () => {
+
+    let navbarSection: NavbarSection;
+
+    test.beforeEach(async ({ page }) => {
+    navbarSection = new NavbarSection(page);
+
+    //Enter website
+    await test.step('Open markets page', async () => {
+    await page.goto('https://stockanalyzer.adenxus.com/markets');
+    });
+    //Click Search bar
+    await test.step('Click Search bar', async () => {
+    await navbarSection.clickSearchBar();
+    });
+  });
+            
 
         test('User clear search field', async ({ page }) => {
 
         const navbarSection = new NavbarSection(page);  
         const symbol = uniSearchData.valid_symbol.some_symbol;
-
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
 
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(symbol);
@@ -332,20 +277,26 @@ test.describe('User search with valid value', () => {
 
 
         test.describe('Verify system displays no results when search returns no data', () => {
+        let navbarSection: NavbarSection;
+
+        test.beforeEach(async ({ page }) => {
+        navbarSection = new NavbarSection(page);
+
+        //Enter website
+        await test.step('Open markets page', async () => {
+        await page.goto('https://stockanalyzer.adenxus.com/markets');
+        });
+        //Click Search bar
+        await test.step('Click Search bar', async () => {
+        await navbarSection.clickSearchBar();
+        });
+        });
 
         test('User search returned no data', async ({ page }) => {
 
         const navbarSection = new NavbarSection(page);  
         const symbol = uniSearchData.invalid_input.symbol_dont_exits;
         ;
-
-        await test.step('Open markets page', async () => {
-        await page.goto('https://stockanalyzer.adenxus.com/markets');
-        });
-
-        await test.step('Click Search bar', async () => {
-        await navbarSection.clickSearchBar();
-        });
 
         await test.step('Fill symbol', async () => {
         await navbarSection.searchbar.fill(symbol);
