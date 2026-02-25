@@ -16,32 +16,30 @@ export class WatchlistPage {
     return this.page.getByTestId("searches-input-field");
   }
 
-  get searchResult(): Locator {
-    return this.page.getByTestId("watchlist-search-symbol-NVDA");
+  getSearchResult(symbol: string): Locator {
+    return this.page.locator(
+      `[data-testid="watchlist-search-symbol-${symbol}"]`,
+    );
   }
 
-  get stockBookMarkIconWatchlist(): Locator {
-    return this.page.getByTestId("watchlist-search-add-button-NVDA");
+  getStockBookMarkIconWatchlist(symbol: string): Locator {
+    return this.page.locator(
+      `[data-testid="watchlist-search-add-button-${symbol}"]`,
+    );
   }
 
-  get watchlistSymbolNvda(): Locator {
-    return this.page.getByTestId("watchlist-symbol-NVDA");
+  getWatchlistSymbol(symbol: string): Locator {
+    return this.page.locator(`[data-testid="watchlist-symbol-${symbol}"]`);
   }
 
-  get stockBookMarkIconListView(): Locator {
-    return this.page.getByTestId("market-list-bookmark-button-AAPL");
+  getStockBookMarkIconListView(symbol: string): Locator {
+    return this.page.locator(
+      `[data-testid="market-list-bookmark-button-${symbol}"]`,
+    );
   }
 
-  get watchlistSymbolAapl(): Locator {
-    return this.page.getByTestId("watchlist-symbol-AAPL");
-  }
-
-  get watchlistSymbolIntc(): Locator {
-    return this.page.getByTestId("watchlist-symbol-INTC");
-  }
-
-  get stockSymbolResult(): Locator {
-    return this.page.getByTestId("market-list-symbol-INTC");
+  getStockSymbolResult(symbol: string): Locator {
+    return this.page.locator(`[data-testid="market-list-symbol-${symbol}"]`);
   }
 
   get watchListRow(): Locator {
@@ -60,15 +58,15 @@ export class WatchlistPage {
     return this.searchField.type(keyword, { delay: 50 });
   }
 
-  async clickStockBookMarkIconWathclist() {
-    return this.stockBookMarkIconWatchlist.click();
+  async clickStockBookMarkIconWathclist(symbol: string) {
+    return this.getStockBookMarkIconWatchlist(symbol).click();
   }
 
-  async clickStockBookMarkIconListView() {
-    return this.stockBookMarkIconListView.click();
+  async clickStockBookMarkIconListView(symbol: string) {
+    return this.getStockBookMarkIconListView(symbol).click();
   }
 
-  async clickToStockProfile() {
-    return this.stockSymbolResult.click();
+  async clickToStockProfile(symbol: string) {
+    return this.getStockSymbolResult(symbol).click();
   }
 }

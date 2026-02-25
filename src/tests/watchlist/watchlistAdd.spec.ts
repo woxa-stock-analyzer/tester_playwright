@@ -93,12 +93,12 @@ test.describe("User add stock to watchlist", () => {
 
     // Wait for searh result
     await test.step("Wait for search Result", async () => {
-      await expect(watchlist.searchResult).toBeVisible();
+      await expect(watchlist.getSearchResult(watchlistData.search)).toBeVisible();
     });
 
     // Click add stock to watchlist
     await test.step("Click add stock to watchlist", async () => {
-      await watchlist.clickStockBookMarkIconWathclist();
+      await watchlist.clickStockBookMarkIconWathclist(watchlistData.search);
     });
 
     // Close modal
@@ -108,7 +108,7 @@ test.describe("User add stock to watchlist", () => {
 
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolNvda).toBeVisible();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.search)).toBeVisible();
     });
   });
 
@@ -139,7 +139,7 @@ test.describe("User add stock to watchlist", () => {
 
     // Click add stock to watchlist
     await test.step("Click add stock to watchlist", async () => {
-      await watchlist.clickStockBookMarkIconListView();
+      await watchlist.clickStockBookMarkIconListView(watchlistData.searchListView);
     });
 
     //   Enter watchlist page
@@ -149,7 +149,7 @@ test.describe("User add stock to watchlist", () => {
 
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolAapl).toBeVisible();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.searchListView)).toBeVisible();
     });
   });
 
@@ -163,7 +163,7 @@ test.describe("User add stock to watchlist", () => {
 
     // Click to stock profile
     await test.step("Click to stock profile", async () => {
-      await watchlist.clickToStockProfile();
+      await watchlist.clickToStockProfile(watchlistData.searchForProfile);
     });
 
     // Verify page has been redirect
@@ -185,7 +185,7 @@ test.describe("User add stock to watchlist", () => {
 
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolIntc).toBeVisible();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.searchForProfile)).toBeVisible();
     });
   });
 });
