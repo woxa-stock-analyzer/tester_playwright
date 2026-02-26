@@ -1,0 +1,22 @@
+{
+    "valid_symbol":{
+        "full_symbol": "NVDA",
+        "some_symbol": "a",
+        "patail_symbol": "AS",
+        "sensitive_case1": "nvda",
+        "sensitive_case2": "NvDa",
+        "sensitive_case3": "NVDA"
+    },
+    "valid_company_name": {
+        "company_name": "NVIDIA Corp"
+    },
+
+    "invalid_input":{
+        "whitespace": "  ",
+        "symbolHaveWhitespace": "NVDA ",
+        "Emoji": "😀",
+        "special_character": "!{}[]",
+        "symbol_dont_exits": "XX123"
+    }
+
+}

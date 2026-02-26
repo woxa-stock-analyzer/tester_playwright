@@ -69,4 +69,39 @@ export class WatchlistPage {
   async clickToStockProfile(symbol: string) {
     return this.getStockSymbolResult(symbol).click();
   }
+    return this.searchField.type(keyword, { delay: 50 });;
+  }
+
+  async clickStockBookMarkIconWathclist() {
+    return this.stockBookMarkIconWatchlist.click();
+  }
+
+  async clickStockBookMarkIconListView() {
+    return this.stockBookMarkIconListView.click();
+  }
+
+  async clickToStockProfile() {
+    return this.stockSymbolResult.click();
+  }
+
+//remove watchlist
+
+  getRemoveButton(symbol: string) {
+  return this.page.locator(`[data-testid="watchlist-remove-button-${symbol}"]`);
+  }
+
+  async clickRemoveButton(symbol: string){
+    return this.getRemoveButton(symbol).click()
+  }
+
+
+  //undo
+  get undoButton(): Locator{
+    return this.page.getByRole('button', { name: 'Undo' });
+  }
+
+  async clickUndoBotton(){
+    return this.undoButton.click()
+  }
+
 }

@@ -1,5 +1,7 @@
 {
     "search": "NVDA",
     "searchListView": "AAPL",
-    "searchForProfile": "INTC"
+    "searchForProfile": "INTC",
+
+    "searchStock": "ABNB"
 }
