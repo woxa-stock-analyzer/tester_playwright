@@ -75,7 +75,7 @@ test.describe(" User remove then use undo function", () => {
     await page.waitForTimeout(1000);
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolNvda).toBeVisible();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.search)).toBeVisible();
     });
   });
 

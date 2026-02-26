@@ -93,7 +93,9 @@ test.describe("User add stock to watchlist", () => {
 
     // Wait for searh result
     await test.step("Wait for search Result", async () => {
-      await expect(watchlist.getSearchResult(watchlistData.search)).toBeVisible();
+      await expect(
+        watchlist.getSearchResult(watchlistData.search),
+      ).toBeVisible();
     });
 
     // Click add stock to watchlist
@@ -108,84 +110,93 @@ test.describe("User add stock to watchlist", () => {
 
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.getWatchlistSymbol(watchlistData.search)).toBeVisible();
-    });
-  });
-
-  test("Add-watchlist-002 User add watchlist from list  view", async ({
-    page,
-  }) => {
-    // Fill keyword for search
-    await test.step("Fill keyword for search", async () => {
-      await market.fillSearch(watchlistData.searchListView);
-    });
-
-    // Wait for search loading
-    await test.step("Wait for loading", async () => {
-      await expect(market.rowLoading).not.toBeVisible();
-    });
-
-    // Verify result symbol contain keyword
-    await test.step("Verify search result symbol", async () => {
       await expect(
-        market.getSymbolCellContains(watchlistData.searchListView).first(),
+        watchlist.getWatchlistSymbol(watchlistData.search),
       ).toBeVisible();
-      expect(
-        await market
-          .getSymbolCellContains(watchlistData.searchListView)
-          .count(),
-      ).toBeGreaterThan(0);
-    });
-
-    // Click add stock to watchlist
-    await test.step("Click add stock to watchlist", async () => {
-      await watchlist.clickStockBookMarkIconListView(watchlistData.searchListView);
-    });
-
-    //   Enter watchlist page
-    await test.step("Go to watchlist page", async () => {
-      await market.goToWatchlistPage();
-    });
-
-    // Verify watchlist stock update
-    await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.getWatchlistSymbol(watchlistData.searchListView)).toBeVisible();
     });
   });
+});
 
-  test("Add-watchlsit-003 User add watchlist from stock profile", async ({
-    page,
-  }) => {
-    // Fill keyword for search
-    await test.step("Fill keyword for search", async () => {
-      await market.fillSearch(watchlistData.searchForProfile);
-    });
+test("Add-watchlist-002 User add watchlist from list  view", async ({
+  page,
+}) => {
+  // Fill keyword for search
+  await test.step("Fill keyword for search", async () => {
+    await market.fillSearch(watchlistData.searchListView);
+  });
 
-    // Click to stock profile
-    await test.step("Click to stock profile", async () => {
-      await watchlist.clickToStockProfile(watchlistData.searchForProfile);
-    });
+  // Wait for search loading
+  await test.step("Wait for loading", async () => {
+    await expect(market.rowLoading).not.toBeVisible();
+  });
 
-    // Verify page has been redirect
-    await test.step("Verify page has been redirect", async () => {
-      await expect(page).toHaveURL(
-        "https://stockanalyzer.adenxus.com/stock-profile/INTC/Overview",
-      );
-    });
+  // Verify result symbol contain keyword
+  await test.step("Verify search result symbol", async () => {
+    await expect(
+      market.getSymbolCellContains(watchlistData.searchListView).first(),
+    ).toBeVisible();
+    expect(
+      await market.getSymbolCellContains(watchlistData.searchListView).count(),
+    ).toBeGreaterThan(0);
+  });
 
-    // Click to add to watchlist
-    await test.step("Click to stock profile", async () => {
-      await stockProfile.clickBookMarkButton();
-    });
+  // Click add stock to watchlist
+  await test.step("Click add stock to watchlist", async () => {
+    await watchlist
+      .getStockBookMarkIconListView(watchlistData.searchListView)
+      .click();
+  });
 
-    //   Enter watchlist page
-    await test.step("Go to watchlist page", async () => {
-      await market.goToWatchlistPage();
-    });
+  //   Enter watchlist page
+  await test.step("Go to watchlist page", async () => {
+    await market.goToWatchlistPage();
+  });
 
-    // Verify watchlist stock update
-    await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.getWatchlistSymbol(watchlistData.searchForProfile)).toBeVisible();
-    });
+  // Verify watchlist stock update
+  await test.step("Verify watchlist stock update", async () => {
+    await expect(
+      watchlist.getWatchlistSymbol(watchlistData.searchListView),
+    ).toBeVisible();
+  });
+});
+
+test("Add-watchlsit-003 User add watchlist from stock profile", async ({
+  page,
+}) => {
+  // Fill keyword for search
+  await test.step("Fill keyword for search", async () => {
+    await market.fillSearch(watchlistData.searchForProfile);
+  });
+
+  // Click to stock profile
+  await test.step("Click to stock profile", async () => {
+    await expect(
+      market.getSymbolCellContains(watchlistData.searchForProfile).first(),
+    ).toBeVisible();
+    await watchlist.clickToStockProfile(watchlistData.searchForProfile);
+  });
+
+  // Verify page has been redirect
+  await test.step("Verify page has been redirect", async () => {
+    await expect(page).toHaveURL(
+      "https://stockanalyzer.adenxus.com/stock-profile/INTC/Overview",
+    );
+  });
+
+  // Click to add to watchlist
+  await test.step("Click to stock profile", async () => {
+    await stockProfile.clickBookMarkButton();
+  });
+
+  //   Enter watchlist page
+  await test.step("Go to watchlist page", async () => {
+    await market.goToWatchlistPage();
+  });
+
+  // Verify watchlist stock update
+  await test.step("Verify watchlist stock update", async () => {
+    await expect(
+      watchlist.getWatchlistSymbol(watchlistData.searchForProfile),
+    ).toBeVisible();
   });
 });

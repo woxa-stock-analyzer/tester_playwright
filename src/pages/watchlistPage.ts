@@ -62,26 +62,8 @@ export class WatchlistPage {
     return this.getStockBookMarkIconWatchlist(symbol).click();
   }
 
-  async clickStockBookMarkIconListView(symbol: string) {
-    return this.getStockBookMarkIconListView(symbol).click();
-  }
-
   async clickToStockProfile(symbol: string) {
     return this.getStockSymbolResult(symbol).click();
-  }
-    return this.searchField.type(keyword, { delay: 50 });;
-  }
-
-  async clickStockBookMarkIconWathclist() {
-    return this.stockBookMarkIconWatchlist.click();
-  }
-
-  async clickStockBookMarkIconListView() {
-    return this.stockBookMarkIconListView.click();
-  }
-
-  async clickToStockProfile() {
-    return this.stockSymbolResult.click();
   }
 
 //remove watchlist

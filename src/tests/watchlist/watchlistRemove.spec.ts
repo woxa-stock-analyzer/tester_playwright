@@ -69,7 +69,7 @@ test.describe("User remove watchlist", () => {
 
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolNvda).toBeHidden();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.search)).toBeHidden();
     });
   });
 
@@ -95,17 +95,17 @@ test.describe("User remove watchlist", () => {
 
     // Wait for searh result
     await test.step("Wait for search Result", async () => {
-      await expect(watchlist.searchResult).toBeVisible();
+      await expect(watchlist.getSearchResult(watchlistData.search)).toBeVisible();
     });
 
     // Click add stock to watchlist
     await test.step("Click add stock to watchlist", async () => {
-      await watchlist.clickStockBookMarkIconWathclist();
+      await watchlist.getStockBookMarkIconWatchlist(watchlistData.search).click();
     });
 
     // Click again for remove stock from watchlist
     await test.step("Click again for remove stock from watchlist", async () => {
-    await watchlist.clickStockBookMarkIconWathclist();
+    await watchlist.getStockBookMarkIconWatchlist(watchlistData.search).click();
     });
 
     // Close modal
@@ -115,7 +115,7 @@ test.describe("User remove watchlist", () => {
 
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolNvda).toBeHidden();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.search)).toBeHidden();
     });
   });
 
@@ -145,7 +145,7 @@ test.describe("User remove watchlist", () => {
     await market.page.waitForLoadState("networkidle");
 
     await test.step("Click agian to remove stock from watchlist", async () => {
-      await watchlist.clickStockBookMarkIconListView();
+      await watchlist.getStockBookMarkIconListView(watchlistData.searchListView).click();
     });
 
     //   Enter watchlist page
@@ -158,7 +158,7 @@ test.describe("User remove watchlist", () => {
 
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolAapl).toBeHidden();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.searchListView)).toBeHidden();
     });
   });
 
@@ -174,7 +174,7 @@ test.describe("User remove watchlist", () => {
 
     // Click to stock profile
     await test.step("Click to stock profile", async () => {
-      await watchlist.clickToStockProfile();
+      await watchlist.clickToStockProfile(watchlistData.searchForProfile);
     });
 
     // Verify page has been redirect
@@ -197,7 +197,7 @@ test.describe("User remove watchlist", () => {
 
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolIntc).toBeHidden();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.searchForProfile)).toBeHidden();
     });
   });
 

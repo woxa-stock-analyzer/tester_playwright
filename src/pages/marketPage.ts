@@ -135,7 +135,7 @@ export class MarketPage {
   }
 
   async fillSearch(keyword: string) {
-    await this.searchBar.fill(keyword);
+     await this.searchBar.type(keyword, { delay: 50 });
   }
 
   getSymbolCellContains(keyword: string): Locator {
