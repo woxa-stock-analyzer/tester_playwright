@@ -25,12 +25,11 @@ test.beforeEach(async ({ page }) => {
     await market.goToMarketsPage();
   });
 
-  // wait for API/network to finish
-  await market.page.waitForLoadState("networkidle");
-
   // Open sign in modal
   await test.step("Open sign in modal", async () => {
+    await navbar.guestUserAvatar.isVisible();
     await navbar.clickGuestUserAvatar();
+    await navbar.clickSignInButton();
   });
 
   // Sign in with valid user
@@ -44,6 +43,7 @@ test.beforeEach(async ({ page }) => {
 
   // Verify sign in successful
   await test.step("Verify sign in successful", async () => {
+    await navbar.clickGuestUserAvatar();
     await expect(navbar.userAvatar).toBeVisible();
   });
 });
@@ -61,8 +61,24 @@ test.describe(" User remove then use undo function", () => {
       await market.goToWatchlistPage();
     });
 
-    // wait for API/network to finish
-    await page.waitForTimeout(2000);
+            // Click add watchlist button
+    await test.step("Click add watchlist button", async () => {
+      await watchlist.watchlistAddButtonClick();
+    });
+        // Fill search NVDA
+    await test.step("Fill search NVDA", async () => {
+      await watchlist.fillSearchField(watchlistData.search);
+    });
+
+    // Click again for remove stock from watchlist
+    await test.step("Click again for remove stock from watchlist", async () => {
+    await watchlist.clickStockBookMarkIconWathclist(watchlistData.search);
+    });
+
+    // Close modal
+    await test.step("Close modal by clicking backdrop", async () => {
+    await page.locator(".fixed.inset-0").click();
+    });
 
     await test.step("Click remove NVDA form watchlist", async () => {
         await watchlist.clickRemoveButton(watchlistData.search);
@@ -75,7 +91,7 @@ test.describe(" User remove then use undo function", () => {
     await page.waitForTimeout(1000);
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolNvda).toBeVisible();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.search)).toBeVisible();
     });
   });
 
