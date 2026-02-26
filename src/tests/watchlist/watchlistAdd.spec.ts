@@ -25,12 +25,11 @@ test.beforeEach(async ({ page }) => {
     await market.goToMarketsPage();
   });
 
-  // wait for API/network to finish
-  await market.page.waitForLoadState("networkidle");
-
   // Open sign in modal
   await test.step("Open sign in modal", async () => {
+    await navbar.guestUserAvatar.isVisible();
     await navbar.clickGuestUserAvatar();
+    await navbar.clickSignInButton();
   });
 
   // Sign in with valid user
@@ -44,7 +43,32 @@ test.beforeEach(async ({ page }) => {
 
   // Verify sign in successful
   await test.step("Verify sign in successful", async () => {
+    await navbar.clickGuestUserAvatar();
     await expect(navbar.userAvatar).toBeVisible();
+  });
+});
+
+test.describe("Clear state before test add watchlsit", () => {
+  test("Clear watchlist", async ({ page }) => {
+    //   Enter watchlist page
+    await test.step("Go to watchlist page", async () => {
+      await market.goToWatchlistPage();
+    });
+
+    // Check for stock in watchlist
+    await test.step("Check for exist stock in watchlist", async () => {
+      await page.waitForLoadState("networkidle");
+
+      const count = await watchlist.removeButton.count();
+
+      if (count > 0) {
+        await expect(watchlist.watchListRow.first()).toBeVisible();
+        while ((await watchlist.removeButton.count()) > 0) {
+          await watchlist.watchListRow.first().hover();
+          await watchlist.removeButton.first().click();
+        }
+      }
+    });
   });
 });
 
@@ -56,9 +80,6 @@ test.describe("User add stock to watchlist", () => {
     await test.step("Go to watchlist page", async () => {
       await market.goToWatchlistPage();
     });
-
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
 
     // Click add watchlist button
     await test.step("Click add watchlist button", async () => {
@@ -72,12 +93,12 @@ test.describe("User add stock to watchlist", () => {
 
     // Wait for searh result
     await test.step("Wait for search Result", async () => {
-      await expect(watchlist.searchResult).toBeVisible();
+      await expect(watchlist.getSearchResult(watchlistData.search)).toBeVisible();
     });
 
     // Click add stock to watchlist
     await test.step("Click add stock to watchlist", async () => {
-      await watchlist.clickStockBookMarkIconWathclist();
+      await watchlist.clickStockBookMarkIconWathclist(watchlistData.search);
     });
 
     // Close modal
@@ -87,7 +108,7 @@ test.describe("User add stock to watchlist", () => {
 
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolNvda).toBeVisible();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.search)).toBeVisible();
     });
   });
 
@@ -98,9 +119,6 @@ test.describe("User add stock to watchlist", () => {
     await test.step("Fill keyword for search", async () => {
       await market.fillSearch(watchlistData.searchListView);
     });
-
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
 
     // Wait for search loading
     await test.step("Wait for loading", async () => {
@@ -121,7 +139,7 @@ test.describe("User add stock to watchlist", () => {
 
     // Click add stock to watchlist
     await test.step("Click add stock to watchlist", async () => {
-      await watchlist.clickStockBookMarkIconListView();
+      await watchlist.clickStockBookMarkIconListView(watchlistData.searchListView);
     });
 
     //   Enter watchlist page
@@ -129,12 +147,9 @@ test.describe("User add stock to watchlist", () => {
       await market.goToWatchlistPage();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolAapl).toBeVisible();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.searchListView)).toBeVisible();
     });
   });
 
@@ -146,17 +161,16 @@ test.describe("User add stock to watchlist", () => {
       await market.fillSearch(watchlistData.searchForProfile);
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
     // Click to stock profile
     await test.step("Click to stock profile", async () => {
-      await watchlist.clickToStockProfile();
+      await watchlist.clickToStockProfile(watchlistData.searchForProfile);
     });
 
     // Verify page has been redirect
     await test.step("Verify page has been redirect", async () => {
-      await expect(page).toHaveURL("https://stockanalyzer.adenxus.com/stock-profile/INTC/Overview");
+      await expect(page).toHaveURL(
+        "https://stockanalyzer.adenxus.com/stock-profile/INTC/Overview",
+      );
     });
 
     // Click to add to watchlist
@@ -169,12 +183,9 @@ test.describe("User add stock to watchlist", () => {
       await market.goToWatchlistPage();
     });
 
-    // wait for API/network to finish
-    await market.page.waitForLoadState("networkidle");
-
     // Verify watchlist stock update
     await test.step("Verify watchlist stock update", async () => {
-      await expect(watchlist.watchlistSymbolIntc).toBeVisible();
+      await expect(watchlist.getWatchlistSymbol(watchlistData.searchForProfile)).toBeVisible();
     });
   });
 });

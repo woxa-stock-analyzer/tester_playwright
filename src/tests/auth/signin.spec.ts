@@ -25,6 +25,7 @@ test.describe("User sign in with valid", () => {
     // Open sign in modal
     await test.step("Open sign in modal", async () => {
       await navbar.clickGuestUserAvatar();
+      await navbar.clickSignInButton();
     });
 
     // Sign in with valid user
@@ -42,6 +43,7 @@ test.describe("User sign in with valid", () => {
 
     // Verify sign in successful
     await test.step("Verify sign in successful", async () => {
+      await navbar.clickGuestUserAvatar();
       await expect(navbar.userAvatar).toBeVisible();
     });
 
@@ -66,7 +68,8 @@ test.describe("User sign in with valid", () => {
 
     // Verify user has been sign out
     await test.step("Verify user has been sign out", async () => {
-      await expect(navbar.guestUserAvatar).toBeVisible();
+      await navbar.clickGuestUserAvatar();
+      await expect(navbar.userAvatar).not.toBeVisible();
     });
   });
 });
@@ -81,6 +84,7 @@ test.describe("User sign in with invalid", () => {
     // Open sign in modal
     await test.step("Open sign in modal", async () => {
       await navbar.clickGuestUserAvatar();
+      await navbar.clickSignInButton();
     });
 
     // Sign in with invalid email
@@ -111,6 +115,7 @@ test.describe("User sign in with invalid", () => {
     // Open sign in modal
     await test.step("Open sign in modal", async () => {
       await navbar.clickGuestUserAvatar();
+      await navbar.clickSignInButton();
     });
 
     // Sign in with invalid password

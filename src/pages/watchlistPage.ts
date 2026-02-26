@@ -3,48 +3,51 @@ import { Locator, Page } from "@playwright/test";
 export class WatchlistPage {
   readonly page: Page;
 
-
   constructor(page: Page) {
     this.page = page;
-
-
   }
 
   //   ===== LOCATORS =====
-  get watchlistAddButton(): Locator{
+  get watchlistAddButton(): Locator {
     return this.page.getByTestId("watchlist-add-button");
   }
 
-  get searchField(): Locator{
-    return this.page.getByTestId('searches-input-field');
+  get searchField(): Locator {
+    return this.page.getByTestId("searches-input-field");
   }
 
-  get searchResult(): Locator{
-    return this.page.getByTestId('watchlist-search-symbol-NVDA');
+  getSearchResult(symbol: string): Locator {
+    return this.page.locator(
+      `[data-testid="watchlist-search-symbol-${symbol}"]`,
+    );
   }
 
-  get stockBookMarkIconWatchlist(): Locator{
-    return this.page.getByTestId('watchlist-search-add-button-NVDA');
+  getStockBookMarkIconWatchlist(symbol: string): Locator {
+    return this.page.locator(
+      `[data-testid="watchlist-search-add-button-${symbol}"]`,
+    );
   }
 
-  get watchlistSymbolNvda(): Locator{
-    return this.page.getByTestId('watchlist-symbol-NVDA');
+  getWatchlistSymbol(symbol: string): Locator {
+    return this.page.locator(`[data-testid="watchlist-symbol-${symbol}"]`);
   }
 
-  get stockBookMarkIconListView(): Locator{
-    return this.page.getByTestId('market-list-bookmark-button-AAPL');
+  getStockBookMarkIconListView(symbol: string): Locator {
+    return this.page.locator(
+      `[data-testid="market-list-bookmark-button-${symbol}"]`,
+    );
   }
 
-  get watchlistSymbolAapl(): Locator{
-    return this.page.getByTestId('watchlist-symbol-AAPL');
+  getStockSymbolResult(symbol: string): Locator {
+    return this.page.locator(`[data-testid="market-list-symbol-${symbol}"]`);
   }
 
-  get watchlistSymbolIntc(): Locator{
-    return this.page.getByTestId('watchlist-symbol-INTC');
+  get watchListRow(): Locator {
+    return this.page.locator('[data-testid^="watchlist-row-"]');
   }
 
-  get stockSymbolResult(): Locator{
-    return this.page.getByTestId('market-list-symbol-INTC');
+  get removeButton(): Locator {
+    return this.page.locator('[data-testid^="watchlist-remove-icon-"]');
   }
   //   ===== ACTIONS =====
   async watchlistAddButtonClick() {
@@ -52,6 +55,20 @@ export class WatchlistPage {
   }
 
   async fillSearchField(keyword: string) {
+    return this.searchField.type(keyword, { delay: 50 });
+  }
+
+  async clickStockBookMarkIconWathclist(symbol: string) {
+    return this.getStockBookMarkIconWatchlist(symbol).click();
+  }
+
+  async clickStockBookMarkIconListView(symbol: string) {
+    return this.getStockBookMarkIconListView(symbol).click();
+  }
+
+  async clickToStockProfile(symbol: string) {
+    return this.getStockSymbolResult(symbol).click();
+  }
     return this.searchField.type(keyword, { delay: 50 });;
   }
 
