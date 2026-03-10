@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
-import { MarketPage } from "../../pages/marketPage";
-import Search from "../../data/marketSearch.json";
+import { MarketPage } from "../../../pages/marketPage";
+import Search from "../../../data/marketSearch.json";
 
 let market: MarketPage;
 

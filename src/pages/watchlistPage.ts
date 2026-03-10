@@ -83,7 +83,7 @@ export class WatchlistPage {
 
   //undo
   get undoButton(): Locator{
-    return this.page.getByRole('button', { name: 'Undo' });
+    return this.page.getByTestId(/watchlist-toast-action/);
   }
 
   async clickUndoBotton(){

@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { NavbarSection } from "../../pages/navbarSection";
-import { SignInPage } from "../../pages/signinPage";
-import User from "../../data/userSignin.json";
-import { MarketPage } from "../../pages/marketPage";
+import { NavbarSection } from "../../../pages/navbarSection";
+import { SignInPage } from "../../../pages/signinPage";
+import User from "../../../data/userSignin.json";
+import { MarketPage } from "../../../pages/marketPage";
 
 let market: MarketPage;
 let navbar: NavbarSection;

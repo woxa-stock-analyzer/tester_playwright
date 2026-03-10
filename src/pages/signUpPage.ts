@@ -43,8 +43,8 @@ export default class SignUpPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.iconUser = page.locator('[data-testid="nav-signin-desktop"]');
-    this.signUpLink = page.locator('[data-testid="signin-show-signup"]');
+    this.iconUser = page.locator('[data-testid="user-dropdown-trigger"]');
+    this.signUpLink = page.locator('[data-testid="signup-dropdown-button"]');
 
     this.emailField = page.locator('[data-testid="sign-up-email-input-input"]');
     this.passwordField = page.locator('[data-testid="sign-up-password-input-input"]');
@@ -76,9 +76,6 @@ export default class SignUpPage {
     this.displayNameEngRequirement = page.locator('[data-testid="displayname-requirement-english-only-text"]');
     this.displayNameMinLengthRequirement = page.locator('[data-testid="displayname-requirement-min-length-text"]');
     this.displayNameSpecialCharError = page.locator('[data-testid="displayname-requirement-no-special-text"]');
-
-
-    
   }
 
   async clickIconUser() {

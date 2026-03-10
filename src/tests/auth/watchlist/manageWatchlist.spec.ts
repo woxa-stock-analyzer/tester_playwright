@@ -1,12 +1,10 @@
 import test, { expect } from "@playwright/test";
-import { MarketPage } from "../../pages/marketPage";
-import { NavbarSection } from "../../pages/navbarSection";
-import { SignInPage } from "../../pages/signinPage";
-import { WatchlistPage } from "../../pages/watchlistPage";
-import { StockProfilePage } from "../../pages/stockProfilePage";
-
-import User from "../../data/userSignin.json";
-import watchlistData from "../../data/watchlistAdd.json";
+import { MarketPage } from "../../../pages/marketPage";
+import { NavbarSection } from "../../../pages/navbarSection";
+import { SignInPage } from "../../../pages/signinPage";
+import { WatchlistPage } from "../../../pages/watchlistPage";
+import { StockProfilePage } from "../../../pages/stockProfilePage";
+import watchlistData from "../../../data/watchlistAdd.json";
 
 let market: MarketPage;
 let navbar: NavbarSection;
@@ -21,24 +19,7 @@ test.beforeEach(async ({ page }) => {
   watchlist = new WatchlistPage(page);
   stockProfile = new StockProfilePage(page);
 
-  await test.step("Go to Market page", async () => {
-    await market.goToMarketsPage();
-  });
-
-  await test.step("Login with valid user", async () => {
-    await navbar.clickGuestUserAvatar();
-    await navbar.clickSignInButton();
-    await signIn.signIn(
-      User.userLoginValid.email,
-      User.userLoginValid.password,
-    );
-    await signIn.retryIfSessionNotReady();
-  });
-
-  await test.step("Verify login successful", async () => {
-    await navbar.clickGuestUserAvatar();
-    await expect(navbar.userAvatar).toBeVisible();
-  });
+  await market.goToMarketsPage();
 });
 
 /* ======================================================
@@ -137,6 +118,9 @@ test.describe("Remove Watchlist", () => {
     });
 
     await test.step("Remove stock", async () => {
+      await expect(
+        watchlist.getWatchlistSymbol(watchlistData.search),
+      ).toBeVisible();
       await watchlist.clickRemoveButton(watchlistData.search);
     });
 
@@ -215,6 +199,9 @@ test.describe("Undo Remove Watchlist", () => {
     });
 
     await test.step("Remove stock", async () => {
+      await expect(
+        watchlist.getWatchlistSymbol(watchlistData.search),
+      ).toBeVisible();
       await watchlist.clickRemoveButton(watchlistData.search);
     });
 
@@ -225,7 +212,7 @@ test.describe("Undo Remove Watchlist", () => {
     await test.step("Verify stock is restored", async () => {
       await expect(
         watchlist.getWatchlistSymbol(watchlistData.search),
-      ).toBeVisible();
+      ).toHaveCount(1);
     });
   });
 });
