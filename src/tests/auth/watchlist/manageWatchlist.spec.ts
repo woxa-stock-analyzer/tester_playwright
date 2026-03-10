@@ -118,6 +118,9 @@ test.describe("Remove Watchlist", () => {
     });
 
     await test.step("Remove stock", async () => {
+      await expect(
+        watchlist.getWatchlistSymbol(watchlistData.search),
+      ).toBeVisible();
       await watchlist.clickRemoveButton(watchlistData.search);
     });
 
@@ -196,6 +199,9 @@ test.describe("Undo Remove Watchlist", () => {
     });
 
     await test.step("Remove stock", async () => {
+      await expect(
+        watchlist.getWatchlistSymbol(watchlistData.search),
+      ).toBeVisible();
       await watchlist.clickRemoveButton(watchlistData.search);
     });
 
@@ -206,7 +212,7 @@ test.describe("Undo Remove Watchlist", () => {
     await test.step("Verify stock is restored", async () => {
       await expect(
         watchlist.getWatchlistSymbol(watchlistData.search),
-      ).toBeVisible();
+      ).toHaveCount(1);
     });
   });
 });
