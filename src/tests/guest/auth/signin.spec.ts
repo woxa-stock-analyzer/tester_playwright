@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
-import { SignInPage } from "../../pages/signinPage";
-import User from "../../data/userSignin.json";
-import { containsEmoji } from "../../helper/command";
-import { NavbarSection } from "../../pages/navbarSection";
-import { MarketPage } from "../../pages/marketPage";
+import { SignInPage } from "../../../pages/signinPage";
+import User from "../../../data/userSignin.json";
+import { containsEmoji } from "../../../helper/command";
+import { NavbarSection } from "../../../pages/navbarSection";
+import { MarketPage } from "../../../pages/marketPage";
 
 let market: MarketPage;
 let navbar: NavbarSection;
